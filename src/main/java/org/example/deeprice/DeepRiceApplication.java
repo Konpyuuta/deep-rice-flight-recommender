@@ -1,6 +1,6 @@
 package org.example.deeprice;
 
-import org.example.deeprice.commands.SkyScannerApiRequest;
+import org.example.deeprice.commands.GoogleFlightsApiRequest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,7 +9,7 @@ public class DeepRiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DeepRiceApplication.class, args);
-		SkyScannerApiRequest request = new SkyScannerApiRequest();
+		GoogleFlightsApiRequest request = new GoogleFlightsApiRequest();
 		request.execute();
 	}
 
