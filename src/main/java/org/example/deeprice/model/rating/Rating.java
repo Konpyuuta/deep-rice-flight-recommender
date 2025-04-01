@@ -13,10 +13,13 @@ public abstract class Rating {
 
     private Integer cleanilessness;
 
-    public Rating(Integer staffFriendliness, Integer comfortability, Integer cleanilessness) {
+    private Integer foodQuality;
+
+    public Rating(Integer staffFriendliness, Integer comfortability, Integer cleanilessness, Integer foodQuality) {
         this.staffFriendliness = staffFriendliness;
         this.comfortability = comfortability;
         this.cleanilessness = cleanilessness;
+        this.foodQuality = foodQuality;
     }
 
     public Integer getStaffFriendliness() {
@@ -37,5 +40,13 @@ public abstract class Rating {
 
     public Integer getCleanilessness() {
         return cleanilessness;
+    }
+
+    public Integer getFoodQuality() {
+        return foodQuality;
+    }
+
+    public void setFoodQuality(Integer foodQuality) {
+        this.foodQuality = foodQuality;
     }
 }
