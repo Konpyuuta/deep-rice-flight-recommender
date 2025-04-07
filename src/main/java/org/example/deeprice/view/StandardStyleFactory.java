@@ -2,6 +2,8 @@ package org.example.deeprice.view;
 
 import org.example.deeprice.view.components.about.HTMLAbout;
 import org.example.deeprice.view.components.about.HTMLStandardAbout;
+import org.example.deeprice.view.components.chooser.HTMLFlightchooser;
+import org.example.deeprice.view.components.chooser.HTMLStandardFlightChooser;
 import org.example.deeprice.view.components.ephemeral.HTMLEphemeralPreferences;
 import org.example.deeprice.view.components.ephemeral.HTMLStandardEphemeralPreferences;
 import org.example.deeprice.view.components.footer.HTMLFooter;
@@ -50,6 +52,11 @@ public class StandardStyleFactory extends GuiFactory {
     @Override
     public HTMLAbout createAboutView() {
         return new HTMLStandardAbout();
+    }
+
+    @Override
+    public HTMLFlightchooser createFlightchooserView() {
+        return new HTMLStandardFlightChooser();
     }
 
 }

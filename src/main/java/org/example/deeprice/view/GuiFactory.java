@@ -1,5 +1,6 @@
 package org.example.deeprice.view;
 
+import org.example.deeprice.view.components.chooser.HTMLFlightchooser;
 import org.example.deeprice.view.components.ephemeral.HTMLEphemeralPreferences;
 import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.header.HTMLHeader;
@@ -37,6 +38,8 @@ public abstract class GuiFactory {
      */
 
     public abstract HTMLAbout createAboutView();
+
+    public abstract HTMLFlightchooser createFlightchooserView();
 
 
 }

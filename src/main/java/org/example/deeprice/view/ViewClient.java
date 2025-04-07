@@ -46,7 +46,8 @@ public class ViewClient {
                 view = new EphemeralPreferencesDocument(factory);
                 break;
             case FLIGHT_SEARCH_PAGE:
-                view = new FlightSearchDocument();
+                view = new FlightSearchDocument(factory);
+                break;
             default:
                 view = new StartPageDocument(factory);
         }

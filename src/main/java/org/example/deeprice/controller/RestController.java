@@ -18,7 +18,7 @@ public class RestController {
 
     @GetMapping("/")
     public String start() {
-        GraphDBConnector graphDBConnector = new GraphDBConnector();
+        //GraphDBConnector graphDBConnector = new GraphDBConnector();
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.ETERNAL_PREF_PAGE);
         return view.getViewContent();
@@ -31,9 +31,10 @@ public class RestController {
         return view.getViewContent();
     }
 
-    @GetMapping("/flight-chooser")
+    @GetMapping("/flight")
     public String flightChooser() {
         ViewClient client = ViewClient.getViewClientInstance();
-        View view =
+        View view = client.createWebpage(Webpage.FLIGHT_SEARCH_PAGE);
+        return view.getViewContent();
     }
 }
