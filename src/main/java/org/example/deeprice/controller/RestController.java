@@ -30,4 +30,10 @@ public class RestController {
         View view = client.createWebpage(Webpage.EPHEMERAL_PREF_PAGE);
         return view.getViewContent();
     }
+
+    @GetMapping("/flight-chooser")
+    public String flightChooser() {
+        ViewClient client = ViewClient.getViewClientInstance();
+        View view =
+    }
 }

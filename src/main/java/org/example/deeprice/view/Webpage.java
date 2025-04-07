@@ -10,5 +10,6 @@ public enum Webpage {
     ETERNAL_PREF_PAGE,
     EPHEMERAL_PREF_PAGE,
     MAIN_PAGE,
-    ABOUT_PAGE
+    ABOUT_PAGE,
+    FLIGHT_SEARCH_PAGE,
 }
