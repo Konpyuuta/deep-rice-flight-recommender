@@ -7,7 +7,7 @@ package org.example.deeprice.model.rating;
 
 public class AirportRating extends Rating {
 
-    public AirportRating(Integer staffFriendliness, Integer comfortability, Integer cleanilessness) {
-        super(staffFriendliness, comfortability, cleanilessness);
+    public AirportRating(Integer staffFriendliness, Integer comfortability, Integer cleanilessness, Integer foodQuality) {
+        super(staffFriendliness, comfortability, cleanilessness, foodQuality);
     }
 }

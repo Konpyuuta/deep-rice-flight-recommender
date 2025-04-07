@@ -56,12 +56,10 @@ public class GoogleFlightsApiRequest implements Command {
             urlRequest = new URL(URI);
             connection = (HttpURLConnection) urlRequest.openConnection();
             connection.setRequestMethod(REQUEST_METHOD);
-            // Get the response code
             int responseCode = connection.getResponseCode();
             System.out.println("Response Code: " + responseCode);
 
-            // Read response if successful
-            if (responseCode == HttpURLConnection.HTTP_OK) { // 200
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuilder response = new StringBuilder();
@@ -71,13 +69,10 @@ public class GoogleFlightsApiRequest implements Command {
                 }
                 in.close();
 
-                // Print the response
                 System.out.println("Response: " + response.toString());
             } else {
                 System.out.println("GET request failed.");
             }
-
-            // Close the connection
             connection.disconnect();
         } catch (IOException e) {
             throw new RuntimeException(e);
