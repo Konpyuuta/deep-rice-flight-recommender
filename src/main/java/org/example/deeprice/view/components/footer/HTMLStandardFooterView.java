@@ -31,12 +31,10 @@ public class HTMLStandardFooterView extends HTMLFooter {
                 "  <footer class=\"py-3 my-4\">\n" +
                 "    <ul class=\"nav justify-content-center border-bottom pb-3 mb-3\">\n" +
                 "      <li class=\"nav-item\"><a href=\"#\" class=\"nav-link px-2 text-muted\">Home</a></li>\n" +
-                "      <li class=\"nav-item\"><a href=\"#\" class=\"nav-link px-2 text-muted\">Retrieval-Augmented Generation</a></li>\n" +
                 "      <li class=\"nav-item\"><a href=\"#\" class=\"nav-link px-2 text-muted\">Wiki</a></li>\n" +
                 "      <li class=\"nav-item\"><a href=\"#\" class=\"nav-link px-2 text-muted\">About</a></li>\n" +
-                "      <li class=\"nav-item\"><a href=\"#\" class=\"nav-link px-2 text-muted\">BSI</a></li>\n" +
                 "    </ul>\n" +
-                "    <p class=\"text-center text-muted\">&copy; " + ProjectConstants.CURRENT_YEAR + " | " + ProjectConstants.PROJECT_AUTHOR + " | " + "Information Security Group @ ZHAW</p>\n" +
+                "    <p class=\"text-center text-muted\">&copy; " + ProjectConstants.CURRENT_YEAR + " | " + ProjectConstants.PROJECT_AUTHOR + " | " + "M. Sc. Seminar in Social Computing</p>\n" +
                 "  </footer>\n" +
                 "</div>\n" +
                 "\n" +
