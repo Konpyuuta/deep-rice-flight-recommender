@@ -14,6 +14,8 @@ import org.example.deeprice.view.components.navigation.HTMLNavigation;
 import org.example.deeprice.view.components.navigation.HTMLStandardNavigationView;
 import org.example.deeprice.view.components.preferences.HTMLPreferences;
 import org.example.deeprice.view.components.preferences.HTMLStandardPreferences;
+import org.example.deeprice.view.components.topn.HTMLRankingTopN;
+import org.example.deeprice.view.components.topn.HTMLStandardRankingTopN;
 
 /** Standard Factory for generating the GUI-Components ..
  *
@@ -57,6 +59,11 @@ public class StandardStyleFactory extends GuiFactory {
     @Override
     public HTMLFlightchooser createFlightchooserView() {
         return new HTMLStandardFlightChooser();
+    }
+
+    @Override
+    public HTMLRankingTopN createRankingTopNView() {
+        return new HTMLStandardRankingTopN();
     }
 
 }

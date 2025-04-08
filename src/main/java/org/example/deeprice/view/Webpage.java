@@ -12,4 +12,5 @@ public enum Webpage {
     MAIN_PAGE,
     ABOUT_PAGE,
     FLIGHT_SEARCH_PAGE,
+    RANKING_PAGE
 }

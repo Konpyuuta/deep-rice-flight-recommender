@@ -48,6 +48,9 @@ public class ViewClient {
             case FLIGHT_SEARCH_PAGE:
                 view = new FlightSearchDocument(factory);
                 break;
+            case RANKING_PAGE:
+                view = new RankingDocument(factory);
+                break;
             default:
                 view = new StartPageDocument(factory);
         }

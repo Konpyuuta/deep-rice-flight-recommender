@@ -7,6 +7,7 @@ import org.example.deeprice.view.components.header.HTMLHeader;
 import org.example.deeprice.view.components.navigation.HTMLNavigation;
 import org.example.deeprice.view.components.preferences.HTMLPreferences;
 import org.example.deeprice.view.components.about.HTMLAbout;
+import org.example.deeprice.view.components.topn.HTMLRankingTopN;
 
 /** Abstract factory for generating the view components of a specific site ..
  *
@@ -40,6 +41,8 @@ public abstract class GuiFactory {
     public abstract HTMLAbout createAboutView();
 
     public abstract HTMLFlightchooser createFlightchooserView();
+
+    public abstract HTMLRankingTopN createRankingTopNView();
 
 
 }

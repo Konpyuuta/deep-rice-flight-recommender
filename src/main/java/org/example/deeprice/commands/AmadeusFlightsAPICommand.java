@@ -1,11 +1,14 @@
 package org.example.deeprice.commands;
 
 import org.apache.hc.core5.http.NameValuePair;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,22 +21,24 @@ import java.util.Map;
  */
 public class AmadeusFlightsAPICommand implements Command {
 
-    private final String API_KEY = "";
+    private final String API_KEY = "API_KEY";
 
-    private final String API_SECRET = "hcFnQV9nfE9gbpdC5D7W0kKtLmjw";
+    private final String API_SECRET = "SECRET_KEY";
 
     private String URI = "https://test.api.amadeus.com/v2/shopping/flight-offers?";
+
+    private final String AUTH_URL = "https://test.api.amadeus.com/v1/security/oauth2/token";
 
     private URL urlRequest;
     private final String CHAR_SET = "utf-8";
 
     private final List<NameValuePair> PARAMETERS = new ArrayList<NameValuePair>(5);
 
-    private HttpURLConnection connection;
-
     private Map<String, String> parameterMap = new HashMap<>();
 
     private final String REQUEST_METHOD = "GET";
+
+    private final String REQUEST_METHOD_TOKEN_ACCESS = "POST";
 
     private final String COUNTRY_ABBREVIATION = "ch";
 
@@ -48,36 +53,76 @@ public class AmadeusFlightsAPICommand implements Command {
         setParameters();
     }
 
-    @Override
-    public void execute() {
+    public String requestAccessToken() {
+        StringBuilder response = new StringBuilder();
         try {
-            urlRequest = new URL(URI);
-            connection = (HttpURLConnection) urlRequest.openConnection();
-            connection.setRequestMethod(REQUEST_METHOD);
+            URL url = new URL(AUTH_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(REQUEST_METHOD_TOKEN_ACCESS);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setDoOutput(true);
+
+            String message = "grant_type=client_credentials"
+                    + "&client_id=" + API_KEY
+                    + "&client_secret=" + API_SECRET;
+
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(message.getBytes());
+                os.flush();
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+            String output;
+            while ((output = br.readLine()) != null) {
+                response.append(output);
+            }
+            connection.disconnect();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        JSONObject tokenJson = new JSONObject(response.toString());
+        return tokenJson.getString("access_token");
+    }
+
+    public void searchFlights() {
+
+        try {
+            String accessToken = requestAccessToken();
+
+            URL url = new URL("https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=ZRH&destinationLocationCode=BKK&departureDate=2025-05-02&adults=1&nonStop=false&max=250");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + accessToken);
+            connection.setRequestProperty("Accept", "application/json");
+
             int responseCode = connection.getResponseCode();
             System.out.println("Response Code: " + responseCode);
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder content = new StringBuilder();
 
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-
-                System.out.println("Response: " + response.toString());
-            } else {
-                System.out.println("GET request failed.");
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
             }
+
+            in.close();
             connection.disconnect();
+            System.out.println("Flight Offers Response:\n" + content.toString());
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
 
     }
+
+    @Override
+    public void execute() {
+        //searchFlights("ZRH", "DBX", "2025-06-01");
+        searchFlights();
+    }
+
 
     private void initializeParameters() {
         parameterMap.put("departure_id", "ZRH");

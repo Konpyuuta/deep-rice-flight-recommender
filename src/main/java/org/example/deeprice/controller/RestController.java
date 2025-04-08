@@ -37,4 +37,11 @@ public class RestController {
         View view = client.createWebpage(Webpage.FLIGHT_SEARCH_PAGE);
         return view.getViewContent();
     }
+
+    @GetMapping("/ranking")
+    public String ranking() {
+        ViewClient client = ViewClient.getViewClientInstance();
+        View view = client.createWebpage(Webpage.RANKING_PAGE);
+        return view.getViewContent();
+    }
 }
