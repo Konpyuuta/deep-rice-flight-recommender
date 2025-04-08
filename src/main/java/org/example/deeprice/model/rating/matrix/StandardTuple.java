@@ -9,7 +9,6 @@ import org.example.deeprice.model.rating.AirportRating;
  */
 
 public class StandardTuple extends RatingTuple {
-
     private AirlineRating airlineRating;
 
     private AirportRating airportRating;
