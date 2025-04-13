@@ -9,14 +9,23 @@ public class User {
 
     private String username;
 
+    private String email;
+
     private String password;
 
     private EternalPreferences eternalPreferences;
 
-    public User(String username, String password, EternalPreferences eternalPreferences) {
-        this.username = username;
-        this.password = password;
-        this.eternalPreferences = eternalPreferences;
+    private static User instance;
+
+    private User() {
+
+    }
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User();
+        }
+        return instance;
     }
 
     public String getUsername() {
@@ -25,6 +34,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

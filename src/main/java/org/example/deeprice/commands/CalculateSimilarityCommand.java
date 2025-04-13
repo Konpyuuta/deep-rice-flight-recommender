@@ -7,7 +7,9 @@ import org.example.deeprice.model.rating.matrix.RatingTuple;
 import org.example.deeprice.model.rating.matrix.UserPreferenceTuple;
 import org.example.deeprice.model.user.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +25,8 @@ public class CalculateSimilarityCommand implements Command {
 
     private RatingTuple ratingTuple;
 
+    private List<Float[]> flightVectors = new ArrayList<>();
+
     private Map<Float, Flight> cosineSimToFlightMap = new HashMap<>();
 
     public CalculateSimilarityCommand(User user, RatingTuple ratingTuple) {
@@ -33,17 +37,19 @@ public class CalculateSimilarityCommand implements Command {
     @Override
     public void execute() {
         Float[] userPrefs = new Float[10];
-        Float[] ratings = new Float[10];
 
-        float dotProduct = 0;
-        float normUser = 0;
-        float normRating = 0;
-        for (int i = 0; i < userPrefs.length; i++) {
-            dotProduct += userPrefs[i] * ratings[i];
-            normUser += Math.pow(userPrefs[i], 2);
-            normRating += Math.pow(ratings[i], 2);
+        for (Float[] ratings : flightVectors) {
+            float dotProduct = 0;
+            float normUser = 0;
+            float normRating = 0;
+            for (int i = 0; i < userPrefs.length; i++) {
+                dotProduct += userPrefs[i] * ratings[i];
+                normUser += Math.pow(userPrefs[i], 2);
+                normRating += Math.pow(ratings[i], 2);
+            }
+            Double cosineSimilarity = dotProduct / (Math.sqrt(normUser) * Math.sqrt(normRating));
         }
-        Double cosineSimilarity = dotProduct / (Math.sqrt(normUser) * Math.sqrt(normRating));
+
         //cosineSimToFlightMap.put(cosineSimilarity, new Flight("", new Airline("", "", new Rating()), "", "");
     }
 }

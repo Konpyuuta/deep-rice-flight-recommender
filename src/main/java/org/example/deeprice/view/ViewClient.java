@@ -51,6 +51,9 @@ public class ViewClient {
             case RANKING_PAGE:
                 view = new RankingDocument(factory);
                 break;
+            case LOGIN_PAGE:
+                view = new LoginPageDocument(factory);
+                break;
             default:
                 view = new StartPageDocument(factory);
         }

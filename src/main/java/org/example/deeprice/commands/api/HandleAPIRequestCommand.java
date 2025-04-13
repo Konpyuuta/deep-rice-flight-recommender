@@ -2,6 +2,7 @@ package org.example.deeprice.commands.api;
 
 import org.example.deeprice.commands.Command;
 import org.example.deeprice.model.Meal;
+import org.example.deeprice.model.preferences.FlightPreferences;
 import org.example.deeprice.model.result.APIFlightResponse;
 import org.example.deeprice.model.result.FlightOffer;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author MAurice Amon
+ * @author Maurice Amon
  */
 
 public class HandleAPIRequestCommand implements Command {
@@ -21,21 +22,13 @@ public class HandleAPIRequestCommand implements Command {
     private String adults;
     private final Integer maxResults = 10;
 
-    // Longterm preferences ..
-    private Double flightTimeImportance;
-    private Double priceToServiceRatio;
-    private Double height;
-    private Meal meal;
+    public HandleAPIRequestCommand() {
+        FlightPreferences flightPreferences = FlightPreferences.getInstance();
+        this.originLocationCode = flightPreferences.getOriginAirport().getAirportID();
+        this.destinationLocationCode = flightPreferences.getInstance().getDestinationAirport().getAirportID();
+        this.departureDate = flightPreferences.getDepartureDateTime();
+        this.adults = String.valueOf(flightPreferences.getAdults());
 
-    public HandleAPIRequestCommand(String originLocationCode, String destinationLocationCode, String departureDate, String adults, Double flightTimeImportance, Double priceToServiceRatio, Double height, Meal meal) {
-        this.originLocationCode = originLocationCode;
-        this.destinationLocationCode = destinationLocationCode;
-        this.departureDate = departureDate;
-        this.adults = adults;
-        this.flightTimeImportance = flightTimeImportance;
-        this.priceToServiceRatio = priceToServiceRatio;
-        this.height = height;
-        this.meal = meal;
     }
 
     @Override
@@ -46,12 +39,16 @@ public class HandleAPIRequestCommand implements Command {
         apiCommand.initializeParameter("departureDate", departureDate);
         apiCommand.initializeParameter("adults", adults);
         apiCommand.execute();
-        ParseAPIResponseCommand parseAPIResponseCommand = new ParseAPIResponseCommand(apiCommand.getResponse());
+        parseResponse(apiCommand.getResponse());
+        //originLocationCode=ZRH&destinationLocationCode=BKK&departureDate=2025-05-02&adults=1&nonStop=false&max=250
+    }
+
+    private void parseResponse(String response) {
+        ParseAPIResponseCommand parseAPIResponseCommand = new ParseAPIResponseCommand(response);
         parseAPIResponseCommand.execute();
         List<FlightOffer> offers = APIFlightResponse.getInstance().getFlightOffers();
         for(FlightOffer offer: offers) {
             System.out.println(offer);
         }
-        //originLocationCode=ZRH&destinationLocationCode=BKK&departureDate=2025-05-02&adults=1&nonStop=false&max=250
     }
 }

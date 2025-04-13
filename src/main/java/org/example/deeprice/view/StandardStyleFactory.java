@@ -10,6 +10,8 @@ import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.footer.HTMLStandardFooterView;
 import org.example.deeprice.view.components.header.HTMLStandardHeaderView;
 import org.example.deeprice.view.components.header.HTMLHeader;
+import org.example.deeprice.view.components.login.HTMLLogin;
+import org.example.deeprice.view.components.login.HTMLStandardLogin;
 import org.example.deeprice.view.components.navigation.HTMLNavigation;
 import org.example.deeprice.view.components.navigation.HTMLStandardNavigationView;
 import org.example.deeprice.view.components.preferences.HTMLPreferences;
@@ -64,6 +66,11 @@ public class StandardStyleFactory extends GuiFactory {
     @Override
     public HTMLRankingTopN createRankingTopNView() {
         return new HTMLStandardRankingTopN();
+    }
+
+    @Override
+    public HTMLLogin createLoginView() {
+        return new HTMLStandardLogin();
     }
 
 }

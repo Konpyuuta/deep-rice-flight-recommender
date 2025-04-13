@@ -1,11 +1,13 @@
 package org.example.deeprice.controller;
 
 
-import org.example.deeprice.model.graphdb.GraphDBConnector;
+import org.example.deeprice.model.user.User;
 import org.example.deeprice.view.View;
 import org.example.deeprice.view.ViewClient;
 import org.example.deeprice.view.Webpage;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -16,13 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @org.springframework.web.bind.annotation.RequestMapping("/")
 public class RestController {
 
-    @GetMapping("/")
-    public String start() {
-        //GraphDBConnector graphDBConnector = new GraphDBConnector();
-        ViewClient client = ViewClient.getViewClientInstance();
-        View view = client.createWebpage(Webpage.ETERNAL_PREF_PAGE);
-        return view.getViewContent();
-    }
 
     @GetMapping("/ephemeral")
     public String emphemeral() {
@@ -42,6 +37,25 @@ public class RestController {
     public String ranking() {
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.RANKING_PAGE);
+        return view.getViewContent();
+    }
+
+    @GetMapping("/")
+    public String login() {
+        ViewClient client = ViewClient.getViewClientInstance();
+        View view = client.createWebpage(Webpage.LOGIN_PAGE);
+        return view.getViewContent();
+    }
+
+    @PostMapping("/start")
+    public String start(@RequestParam String inputName, @RequestParam String inputMail) {
+        User user = User.getInstance();
+        user.setUsername(inputName);
+        user.setEmail(inputMail);
+        ViewClient client = ViewClient.getViewClientInstance();
+        View view = client.createWebpage(Webpage.ETERNAL_PREF_PAGE);
+
+        System.out.println("Name: " + inputName + " Email: " + inputMail);
         return view.getViewContent();
     }
 }

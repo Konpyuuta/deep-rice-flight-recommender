@@ -4,6 +4,7 @@ import org.example.deeprice.view.components.chooser.HTMLFlightchooser;
 import org.example.deeprice.view.components.ephemeral.HTMLEphemeralPreferences;
 import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.header.HTMLHeader;
+import org.example.deeprice.view.components.login.HTMLLogin;
 import org.example.deeprice.view.components.navigation.HTMLNavigation;
 import org.example.deeprice.view.components.preferences.HTMLPreferences;
 import org.example.deeprice.view.components.about.HTMLAbout;
@@ -43,6 +44,8 @@ public abstract class GuiFactory {
     public abstract HTMLFlightchooser createFlightchooserView();
 
     public abstract HTMLRankingTopN createRankingTopNView();
+
+    public abstract HTMLLogin createLoginView();
 
 
 }

@@ -18,17 +18,17 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "        <h1 class=\"text-center\">Find & Compare Flights Easily ✈\uFE0F</h1>\n" +
                 "        <div class=\"search-box\">\n" +
                 "            <form id=\"flightSearchForm\">\n" +
-                "                <div class=\"row\">\n" +
+                "                <div class=\"form-group\">\n" +
                 "                    <div class=\"col-md-5\">\n" +
-                "                        <label class=\"form-label text-light\">From</label>\n" +
+                "                        <label class=\"form-label\">From: </label>\n" +
                 "                        <input type=\"text\" class=\"form-control airport-search\" id=\"from\" placeholder=\"Departure Airport\">\n" +
                 "                    </div>\n" +
                 "                    <div class=\"col-md-5\">\n" +
-                "                        <label class=\"form-label text-light\">To</label>\n" +
+                "                        <label class=\"form-label\">To: </label>\n" +
                 "                        <input type=\"text\" class=\"form-control airport-search\" id=\"to\" placeholder=\"Destination Airport\">\n" +
                 "                    </div>\n" +
-                "                    <div class=\"col-md-2\">\n" +
-                "                        <label class=\"form-label text-light\">Passengers</label>\n" +
+                "                    <div class=\"col-md-2\" style=\"margin-top: 10px;\">\n" +
+                "                        <label class=\"form-label\">Passengers: </label>\n" +
                 "                        <select class=\"form-select\" id=\"passengers\">\n" +
                 "                            <option>1</option>\n" +
                 "                            <option>2</option>\n" +
@@ -36,14 +36,14 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "                            <option>4+</option>\n" +
                 "                        </select>\n" +
                 "                    </div>\n" +
-                "                </div>\n" +
+                "               \n" +
                 "                <div class=\"row mt-3\">\n" +
-                "                    <div class=\"col-md-4\">\n" +
-                "                        <label class=\"form-label text-light\">Departure Date</label>\n" +
+                "                    <div class=\"col-md-2\" style=\"width: 50%;\">\n" +
+                "                        <label class=\"form-label\">Departure Date</label>\n" +
                 "                        <input type=\"date\" class=\"form-control\" id=\"departure\">\n" +
                 "                    </div>\n" +
-                "                    <div class=\"col-md-4\">\n" +
-                "                        <label class=\"form-label text-light\">Return Date</label>\n" +
+                "                    <div class=\"col-md-2\" style=\"width: 50%;\">\n" +
+                "                        <label class=\"form-label\">Return Date</label>\n" +
                 "                        <input type=\"date\" class=\"form-control\" id=\"return\">\n" +
                 "                    </div>\n" +
                 "                    <div class=\"col-md-4\">\n" +
@@ -76,7 +76,7 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "    <div class=\"calendar-container\">\n" +
                 "        <h2 class=\"text-center\">\uD83D\uDCC5 Monthly Fare Calendar</h2>\n" +
                 "        <div id=\"calendar\"></div>\n" +
-                "    </div></div>\n" +
+                "    </div></div> </div>\n" +
                 "\n" +
                 "    <script src=\"script.js\"></script>";
     }
