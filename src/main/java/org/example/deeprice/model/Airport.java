@@ -22,6 +22,10 @@ public class Airport {
         this.airportRating = airportRating;
     }
 
+    public Airport(String airportID) {
+        this.airportID = airportID;
+    }
+
     public String getAirportID() {
         return airportID;
     }

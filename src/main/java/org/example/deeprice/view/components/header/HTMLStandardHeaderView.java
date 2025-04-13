@@ -31,7 +31,8 @@ public class HTMLStandardHeaderView extends HTMLHeader {
                 "    <link th:href=\"@{/css/style.css}\" rel=\"stylesheet\" type=\"text/css\">\n" +
                 "    <script src=\"" + ProjectConstants.BOOTSTRAP_JAVASCRIPT_DEPENDENCY + "\" " +
                 " integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>\n" +
-                "<link rel=\"icon\" href=\"https://www.zhaw.ch/favicon.ico\" type=\"image/png\">";
+                "<link rel=\"icon\" href=\"https://www.zhaw.ch/favicon.ico\" type=\"image/png\">" +
+                "<link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\" rel=\"stylesheet\">\n";
     }
 
     @Override

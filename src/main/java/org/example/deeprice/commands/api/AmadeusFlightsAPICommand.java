@@ -1,6 +1,7 @@
-package org.example.deeprice.commands;
+package org.example.deeprice.commands.api;
 
 import org.apache.hc.core5.http.NameValuePair;
+import org.example.deeprice.commands.Command;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -8,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,9 +21,9 @@ import java.util.Map;
  */
 public class AmadeusFlightsAPICommand implements Command {
 
-    private final String API_KEY = "API_KEY";
+    private final String API_KEY = "";
 
-    private final String API_SECRET = "SECRET_KEY";
+    private final String API_SECRET = "";
 
     private String URI = "https://test.api.amadeus.com/v2/shopping/flight-offers?";
 
@@ -48,9 +48,10 @@ public class AmadeusFlightsAPICommand implements Command {
 
     private final String AMOUNT_OF_ADULTS = "1";
 
+    private String response;
+
     public AmadeusFlightsAPICommand() {
-        initializeParameters();
-        setParameters();
+        //initializeParameters();
     }
 
     public String requestAccessToken() {
@@ -88,8 +89,8 @@ public class AmadeusFlightsAPICommand implements Command {
 
         try {
             String accessToken = requestAccessToken();
-
-            URL url = new URL("https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=ZRH&destinationLocationCode=BKK&departureDate=2025-05-02&adults=1&nonStop=false&max=250");
+            String URL = "https://test.api.amadeus.com/v2/shopping/flight-offers?";
+            URL url = new URL(setParameters(URL));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Authorization", "Bearer " + accessToken);
@@ -109,6 +110,7 @@ public class AmadeusFlightsAPICommand implements Command {
             in.close();
             connection.disconnect();
             System.out.println("Flight Offers Response:\n" + content.toString());
+            response = content.toString();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -132,9 +134,18 @@ public class AmadeusFlightsAPICommand implements Command {
         parameterMap.put("currency", CURRENCY_ABBREVIATION);
     }
 
-    private void setParameters() {
+    public void initializeParameter(String key, String value) {
+        parameterMap.put(key, value);
+    }
+
+    private String setParameters(String URI) {
         for (String key : parameterMap.keySet()) {
             URI += "&" + key + "=" + parameterMap.get(key);
         }
+        return URI;
+    }
+
+    public String getResponse() {
+        return response;
     }
 }
