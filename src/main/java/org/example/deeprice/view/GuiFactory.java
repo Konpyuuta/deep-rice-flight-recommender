@@ -1,5 +1,6 @@
 package org.example.deeprice.view;
 
+import org.example.deeprice.view.components.account.HTMLAccount;
 import org.example.deeprice.view.components.chooser.HTMLFlightchooser;
 import org.example.deeprice.view.components.ephemeral.HTMLEphemeralPreferences;
 import org.example.deeprice.view.components.footer.HTMLFooter;
@@ -46,6 +47,8 @@ public abstract class GuiFactory {
     public abstract HTMLRankingTopN createRankingTopNView();
 
     public abstract HTMLLogin createLoginView();
+
+    public abstract HTMLAccount createAccountView();
 
 
 }

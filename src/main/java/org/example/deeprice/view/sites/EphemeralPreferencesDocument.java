@@ -2,6 +2,7 @@ package org.example.deeprice.view.sites;
 
 import org.example.deeprice.view.GuiFactory;
 import org.example.deeprice.view.View;
+import org.example.deeprice.view.components.account.HTMLAccount;
 import org.example.deeprice.view.components.ephemeral.HTMLEphemeralPreferences;
 import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.header.HTMLHeader;
@@ -21,6 +22,8 @@ public class EphemeralPreferencesDocument extends View {
 
     private HTMLNavigation navigation;
 
+    private HTMLAccount account;
+
     private HTMLEphemeralPreferences preferences;
 
     private HTMLFooter footer;
@@ -33,6 +36,7 @@ public class EphemeralPreferencesDocument extends View {
         header = factory.createHTMLHeaderView();
         navigation = factory.createHTMLNavigationView();
         preferences = factory.createHTMLEphemeralPreferencesView();
+        account = factory.createAccountView();
         footer = factory.createHTMLFooterView();
     }
 
@@ -44,6 +48,7 @@ public class EphemeralPreferencesDocument extends View {
         view += "<body>\n\n";
         view += navigation.getNavigation();
         view += preferences.getContent();
+        view += account.getContent();
         view += footer.getFooter();
         view += "</body>\n" +
                 "</html>";

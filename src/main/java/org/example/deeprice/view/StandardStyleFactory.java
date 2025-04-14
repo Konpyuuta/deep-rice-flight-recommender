@@ -2,6 +2,8 @@ package org.example.deeprice.view;
 
 import org.example.deeprice.view.components.about.HTMLAbout;
 import org.example.deeprice.view.components.about.HTMLStandardAbout;
+import org.example.deeprice.view.components.account.HTMLAccount;
+import org.example.deeprice.view.components.account.HTMLStandardAccount;
 import org.example.deeprice.view.components.chooser.HTMLFlightchooser;
 import org.example.deeprice.view.components.chooser.HTMLStandardFlightChooser;
 import org.example.deeprice.view.components.ephemeral.HTMLEphemeralPreferences;
@@ -71,6 +73,11 @@ public class StandardStyleFactory extends GuiFactory {
     @Override
     public HTMLLogin createLoginView() {
         return new HTMLStandardLogin();
+    }
+
+    @Override
+    public HTMLAccount createAccountView() {
+        return new HTMLStandardAccount();
     }
 
 }

@@ -3,6 +3,7 @@ package org.example.deeprice.view.sites;
 import org.example.deeprice.view.GuiFactory;
 import org.example.deeprice.view.View;
 import org.example.deeprice.view.components.about.HTMLAbout;
+import org.example.deeprice.view.components.account.HTMLAccount;
 import org.example.deeprice.view.components.chooser.HTMLFlightchooser;
 import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.header.HTMLHeader;
@@ -22,6 +23,8 @@ public class FlightSearchDocument extends View {
 
     private HTMLNavigation navigation;
 
+    private HTMLAccount account;
+
     private HTMLFlightchooser flightchooser;
 
     private HTMLFooter footer;
@@ -34,6 +37,7 @@ public class FlightSearchDocument extends View {
     public void initializeComponents() {
         header = factory.createHTMLHeaderView();
         navigation = factory.createHTMLNavigationView();
+        account = factory.createAccountView();
         flightchooser = factory.createFlightchooserView();
         footer = factory.createHTMLFooterView();
     }
@@ -45,6 +49,7 @@ public class FlightSearchDocument extends View {
         view += header.getHeader();
         view += "<body>\n\n";
         view += navigation.getNavigation();
+        view += account.getContent();
         view += flightchooser.getContent();
         view += footer.getFooter();
         view += "</body>\n" +

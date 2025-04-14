@@ -46,7 +46,7 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "  </div>\n" +
                 "  <fieldset class=\"form-group\">\n" +
                 "    <div class=\"row\">\n" +
-                "      <legend class=\"col-form-label col-sm-2 pt-0\">Passengers</legend>\n" +
+                "      <legend class=\"col-form-label col-sm-2 pt-0\">Passengers: </legend>\n" +
                 "      <div class=\"col-sm-10\">\n" +
                 "        <div class=\"form-check\">\n" +
                 "          <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\" value=\"option1\" checked>\n" +

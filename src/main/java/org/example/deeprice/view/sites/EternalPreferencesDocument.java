@@ -3,6 +3,7 @@ package org.example.deeprice.view.sites;
 import org.example.deeprice.view.GuiFactory;
 import org.example.deeprice.view.View;
 import org.example.deeprice.view.components.about.HTMLAbout;
+import org.example.deeprice.view.components.account.HTMLAccount;
 import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.header.HTMLHeader;
 import org.example.deeprice.view.components.navigation.HTMLNavigation;
@@ -15,6 +16,8 @@ public class EternalPreferencesDocument extends View {
     private HTMLHeader header;
 
     private HTMLNavigation navigation;
+
+    private HTMLAccount account;
 
     private HTMLPreferences preferences;
 
@@ -30,6 +33,7 @@ public class EternalPreferencesDocument extends View {
         header = factory.createHTMLHeaderView();
         navigation = factory.createHTMLNavigationView();
         preferences = factory.createHTMLPreferencesView();
+        account = factory.createAccountView();
         footer = factory.createHTMLFooterView();
     }
 
@@ -40,6 +44,7 @@ public class EternalPreferencesDocument extends View {
         view += header.getHeader();
         view += "<body>\n\n";
         view += navigation.getNavigation();
+        view += account.getContent();
         view += preferences.getForm();
         view += footer.getFooter();
         view += "</body>\n" +
