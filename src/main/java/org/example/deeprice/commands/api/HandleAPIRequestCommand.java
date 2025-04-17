@@ -6,6 +6,7 @@ import org.example.deeprice.model.preferences.FlightPreferences;
 import org.example.deeprice.model.result.APIFlightResponse;
 import org.example.deeprice.model.result.FlightOffer;
 import org.example.deeprice.model.result.flight.FlightJourney;
+import org.example.deeprice.model.result.flight.Results;
 
 import java.util.List;
 
@@ -52,5 +53,6 @@ public class HandleAPIRequestCommand implements Command {
         for(FlightJourney offer: offers) {
             System.out.println(offer);
         }
+        Results.FLIGHT_JOURNEY_LIST = offers;
     }
 }

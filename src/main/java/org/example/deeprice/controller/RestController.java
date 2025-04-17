@@ -2,6 +2,7 @@ package org.example.deeprice.controller;
 
 
 import org.example.deeprice.commands.api.HandleAPIRequestCommand;
+import org.example.deeprice.commands.filtering.FilterAirlineCommand;
 import org.example.deeprice.model.Airport;
 import org.example.deeprice.model.preferences.EternalPreferences;
 import org.example.deeprice.model.preferences.FlightPreferences;
@@ -13,6 +14,8 @@ import org.example.deeprice.view.Webpage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  *
@@ -38,8 +41,10 @@ public class RestController {
         return view.getViewContent();
     }
 
-    @GetMapping("/ranking")
-    public String ranking() {
+    @PostMapping("/ranking")
+    public String ranking(@RequestParam(name = "prefAirlines", required = false) List<String> prefAirlines) {
+        //FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines);
+        //filterAirlineCommand.execute();
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.RANKING_PAGE);
         return view.getViewContent();
