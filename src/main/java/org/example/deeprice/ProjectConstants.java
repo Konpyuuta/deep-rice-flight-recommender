@@ -34,6 +34,10 @@ public abstract class ProjectConstants {
     // Breadcrumb navigation ..
     public static final String ETERNAL_PREF_NAV = "Startpage";
 
+    public static final String NEO4J_DB_NAME = "neo4j";
+
+    public static final String NEO4J_DB_PASSWORD = "Mao1596Mao!";
+
 
 
 }

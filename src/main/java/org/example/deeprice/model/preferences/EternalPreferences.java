@@ -13,6 +13,10 @@ public class EternalPreferences {
 
     private Double foodPreference;
 
+    private Double seatComfortabilityPreference;
+
+    private Double customerServicePreference;
+
     private static EternalPreferences instance;
 
     private EternalPreferences() {
@@ -40,6 +44,21 @@ public class EternalPreferences {
 
     public void setFoodPreference(Double foodPreference) {
         this.foodPreference = foodPreference;
+    }
+
+    public Double getSeatComfortabilityPreference() {
+        return seatComfortabilityPreference;
+    }
+    public void setSeatComfortabilityPreference(Double seatComfortabilityPreference) {
+        this.seatComfortabilityPreference = seatComfortabilityPreference;
+    }
+
+    public Double getCustomerServicePreference() {
+        return customerServicePreference;
+    }
+
+    public void setCustomerServicePreference(Double customerServicePreference) {
+        this.customerServicePreference = customerServicePreference;
     }
 
     public void destroyInstance() {

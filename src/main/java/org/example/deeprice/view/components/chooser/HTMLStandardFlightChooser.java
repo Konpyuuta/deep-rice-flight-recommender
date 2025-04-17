@@ -17,7 +17,7 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
         content = "<h1 class=\"text-center\">Find & Compare Flights Easily ✈\uFE0F</h1><br /><br /><div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><div class=\"hero\">\n" +
                 "        \n" +
                 "        <div class=\"search-box\">\n" +
-                "<form id=\"flightSearchForm\">\n" +
+                "<form action=\"/ephemeral\" id=\"flightSearchForm\" method=\"post\">\n" +
                 "  <div class=\"form-group row\">\n" +
                 "    <label for=\"departureField\" class=\"col-sm-2 col-form-label\">From: </label>\n" +
                 "    <div class=\"col-sm-10\">\n" +

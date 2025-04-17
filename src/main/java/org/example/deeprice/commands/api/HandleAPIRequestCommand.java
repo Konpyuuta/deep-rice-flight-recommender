@@ -5,6 +5,7 @@ import org.example.deeprice.model.Meal;
 import org.example.deeprice.model.preferences.FlightPreferences;
 import org.example.deeprice.model.result.APIFlightResponse;
 import org.example.deeprice.model.result.FlightOffer;
+import org.example.deeprice.model.result.flight.FlightJourney;
 
 import java.util.List;
 
@@ -34,10 +35,11 @@ public class HandleAPIRequestCommand implements Command {
     @Override
     public void execute() {
         AmadeusFlightsAPICommand apiCommand = new AmadeusFlightsAPICommand();
-        apiCommand.initializeParameter("originLocationCode", originLocationCode);
-        apiCommand.initializeParameter("destinationLocationCode", destinationLocationCode);
-        apiCommand.initializeParameter("departureDate", departureDate);
-        apiCommand.initializeParameter("adults", adults);
+        FlightPreferences flightPreferences = FlightPreferences.getInstance();
+        apiCommand.initializeParameter("originLocationCode", flightPreferences.getOriginAirport().getAirportID());
+        apiCommand.initializeParameter("destinationLocationCode", flightPreferences.getDestinationAirport().getAirportID());
+        apiCommand.initializeParameter("departureDate", flightPreferences.getDepartureDateTime());
+        apiCommand.initializeParameter("adults", String.valueOf(flightPreferences.getAdults()));
         apiCommand.execute();
         parseResponse(apiCommand.getResponse());
         //originLocationCode=ZRH&destinationLocationCode=BKK&departureDate=2025-05-02&adults=1&nonStop=false&max=250
@@ -46,8 +48,8 @@ public class HandleAPIRequestCommand implements Command {
     private void parseResponse(String response) {
         ParseAPIResponseCommand parseAPIResponseCommand = new ParseAPIResponseCommand(response);
         parseAPIResponseCommand.execute();
-        List<FlightOffer> offers = APIFlightResponse.getInstance().getFlightOffers();
-        for(FlightOffer offer: offers) {
+        List<FlightJourney> offers = parseAPIResponseCommand.getFlightJourneys();
+        for(FlightJourney offer: offers) {
             System.out.println(offer);
         }
     }

@@ -23,12 +23,12 @@ public class StandardTuple extends RatingTuple {
      */
     @Override
     protected void setEntries() {
-        tuple[0] = Float.valueOf((float)airlineRating.getStaffFriendliness());
-        tuple[1] = Float.valueOf((float)airportRating.getComfortability());
-        tuple[2] = Float.valueOf((float)airportRating.getCleanilessness());
-        tuple[3] = Float.valueOf((float)airlineRating.getStaffFriendliness());
-        tuple[4] = Float.valueOf((float)airportRating.getComfortability());
-        tuple[5] = Float.valueOf((float)airportRating.getCleanilessness());
+        tuple[0] = Float.valueOf((float)airlineRating.getCustomerService());
+        tuple[1] = Float.valueOf((float)airportRating.getLegRoom());
+        tuple[2] = Float.valueOf((float)airportRating.getSeatComfort());
+        tuple[3] = Float.valueOf((float)airlineRating.getCustomerService());
+        tuple[4] = Float.valueOf((float)airportRating.getLegRoom());
+        tuple[5] = Float.valueOf((float)airportRating.getSeatComfort());
         counter = 6;
     }
 

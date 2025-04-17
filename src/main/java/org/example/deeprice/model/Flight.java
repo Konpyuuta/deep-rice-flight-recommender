@@ -23,6 +23,10 @@ public class Flight {
         this.endAirport = endAirport;
     }
 
+    public Flight() {
+
+    }
+
     public String getFlightID() {
         return flightID;
     }

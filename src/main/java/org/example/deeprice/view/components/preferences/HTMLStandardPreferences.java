@@ -16,7 +16,7 @@ public class HTMLStandardPreferences extends HTMLPreferences {
     public void initializeForm() {
         form += "<h1 class=\"text-center\">Preferences</h1>\n" +
                 "<div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\">\n" +
-                "<form action=\"flights\" method=\"post\"><label for=\"flight-time-range\" class=\"form-label\">How important is the flight time to me when booking a flight?</label>\n" +
+                "<form action=\"/flight-search\" method=\"post\"><label for=\"flight-time-range\" class=\"form-label\">How important is the flight time to me when booking a flight?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" id=\"flight-time-range\">\n" +
                 "    <br>\n" +
                 "    <br>\n" +
@@ -118,7 +118,7 @@ public class HTMLStandardPreferences extends HTMLPreferences {
                 "    <br>\n" +
                 "    <hr/>\n" +
                 "    <br>\n" +
-                "    <button type=\"button\" class=\"btn btn-primary\">Save preferences</button>\n" +
+                "    <button type=\"submit\" class=\"btn btn-primary\">Save preferences</button>\n" +
                 "</div></form>";
     }
 }

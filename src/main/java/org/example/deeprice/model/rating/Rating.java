@@ -7,39 +7,39 @@ package org.example.deeprice.model.rating;
 
 public abstract class Rating {
 
-    private Integer staffFriendliness;
+    private Integer customerService;
 
-    private Integer comfortability;
+    private Integer legRoom;
 
-    private Integer cleanilessness;
+    private Integer seatComfort;
 
     private Integer foodQuality;
 
     public Rating(Integer staffFriendliness, Integer comfortability, Integer cleanilessness, Integer foodQuality) {
-        this.staffFriendliness = staffFriendliness;
-        this.comfortability = comfortability;
-        this.cleanilessness = cleanilessness;
+        this.customerService = staffFriendliness;
+        this.legRoom = comfortability;
+        this.seatComfort = cleanilessness;
         this.foodQuality = foodQuality;
     }
 
-    public Integer getStaffFriendliness() {
-        return staffFriendliness;
+    public Integer getCustomerService() {
+        return customerService;
     }
 
-    public void setStaffFriendliness(Integer staffFriendliness) {
-        this.staffFriendliness = staffFriendliness;
+    public void setCustomerService(Integer customerService) {
+        this.customerService = customerService;
     }
 
-    public Integer getComfortability() {
-        return comfortability;
+    public Integer getLegRoom() {
+        return legRoom;
     }
 
-    public void setComfortability(Integer comfortability) {
-        this.comfortability = comfortability;
+    public void setLegRoom(Integer legRoom) {
+        this.legRoom = legRoom;
     }
 
-    public Integer getCleanilessness() {
-        return cleanilessness;
+    public Integer getSeatComfort() {
+        return seatComfort;
     }
 
     public Integer getFoodQuality() {
