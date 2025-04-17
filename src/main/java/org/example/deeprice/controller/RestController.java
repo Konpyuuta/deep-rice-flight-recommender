@@ -65,25 +65,29 @@ public class RestController {
     }
 
     @PostMapping("/flight-search")
-    public String search() {
+    public String search(@RequestParam String flighttime, @RequestParam String customerservice, @RequestParam String seat, @RequestParam String height, @RequestParam String foodservice) {
         EternalPreferences eternalPreferences = EternalPreferences.getInstance();
-        eternalPreferences.setCustomerServicePreference(0.7);
-        eternalPreferences.setSeatComfortabilityPreference(0.8);
-        eternalPreferences.setFoodPreference(0.9);
-        eternalPreferences.setHeight(new Height(210));
+        eternalPreferences.setCustomerServicePreference(0.2*Integer.valueOf(customerservice));
+        eternalPreferences.setSeatComfortabilityPreference(0.2*Integer.valueOf(seat));
+        eternalPreferences.setFoodPreference(0.2*Integer.valueOf(foodservice));
+        eternalPreferences.setHeight(new Height(Integer.valueOf(height)));
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.FLIGHT_SEARCH_PAGE);
         return view.getViewContent();
     }
 
     @PostMapping("/ephemeral")
-    public String ephemeralSearch() {
+    public String ephemeralSearch(@RequestParam String departureField, @RequestParam String arrivalField, @RequestParam String departureDateField, @RequestParam String flightClass) {
+        System.out.println("Departure" + departureField);
+        System.out.println("Arrival" + arrivalField);
+        System.out.println("Departure Date" + departureDateField);
+        System.out.println("FlightClass" + flightClass);
         FlightPreferences flightPreferences = FlightPreferences.getInstance();
         flightPreferences.setAdults(1);
-        flightPreferences.setIsDirectFlight(Boolean.TRUE);
-        flightPreferences.setDepartureDateTime("2025-05-02");
-        flightPreferences.setOriginAirport(new Airport("ZRH"));
-        flightPreferences.setDestinationAirport(new Airport("HAN"));
+        flightPreferences.setDepartureDateTime(departureDateField);
+        flightPreferences.setOriginAirport(new Airport(departureField));
+        flightPreferences.setDestinationAirport(new Airport(arrivalField));
+        flightPreferences.setFlightClass(flightClass);
         HandleAPIRequestCommand handleAPIRequestCommand = new HandleAPIRequestCommand();
         handleAPIRequestCommand.execute();
         ViewClient client = ViewClient.getViewClientInstance();

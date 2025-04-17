@@ -21,27 +21,21 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "  <div class=\"form-group row\">\n" +
                 "    <label for=\"departureField\" class=\"col-sm-2 col-form-label\">From: </label>\n" +
                 "    <div class=\"col-sm-10\">\n" +
-                "      <input type=\"text\" class=\"form-control\" id=\"departureField\" aria-describedby=\"airportHelp\" placeholder=\"Origin airport ID\">\n" +
+                "      <input type=\"text\" class=\"form-control\" name=\"departureField\" id=\"departureField\" aria-describedby=\"airportHelp\" placeholder=\"Origin airport ID\">\n" +
                 "      <small id=\"airportHelp\" class=\"form-text text-muted\">For example 'ZRH' for the airport in zurich</small>\n" +
                 "    </div>\n" +
                 "  </div>\n" +
                 "  <div class=\"form-group row\">\n" +
                 "    <label for=\"arrivalField\" class=\"col-sm-2 col-form-label\">To: </label>\n" +
                 "    <div class=\"col-sm-10\">\n" +
-                "      <input type=\"text\" class=\"form-control\" id=\"arrivalField\" aria-describedby=\"airportHelp2\" placeholder=\"Destination airport ID\">\n" +
+                "      <input type=\"text\" class=\"form-control\" name=\"arrivalField\" id=\"arrivalField\" aria-describedby=\"airportHelp2\" placeholder=\"Destination airport ID\">\n" +
                 "      <small id=\"airportHelp2\" class=\"form-text text-muted\">For example 'SGN' for the airport in Ho Chi Minh City</small>\n" +
                 "    </div>\n" +
                 "  </div>\n" +
                 "  <div class=\"form-group row\">\n" +
                 "    <label for=\"departureDateField\" class=\"col-sm-2 col-form-label\">Departure Date: </label>\n" +
                 "    <div class=\"col-sm-3\">\n" +
-                "      <input type=\"date\" class=\"form-control\" id=\"departureDateField\">\n" +
-                "    </div>\n" +
-                "  </div>\n" +
-                "  <div class=\"form-group row\">\n" +
-                "    <label for=\"arrivalDateField\" class=\"col-sm-2 col-form-label\">Arrival Date: </label>\n" +
-                "    <div class=\"col-sm-3\">\n" +
-                "      <input type=\"date\" class=\"form-control\" id=\"arrivalDateField\">\n" +
+                "      <input type=\"date\" class=\"form-control\" name=\"departureDateField\" id=\"departureDateField\">\n" +
                 "    </div>\n" +
                 "  </div>\n" +
                 "  <fieldset class=\"form-group\">\n" +
@@ -49,13 +43,13 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "      <legend class=\"col-form-label col-sm-2 pt-0\">Passengers: </legend>\n" +
                 "      <div class=\"col-sm-10\">\n" +
                 "        <div class=\"form-check\">\n" +
-                "          <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\" value=\"option1\" checked>\n" +
+                "          <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\" value=\"option1\" disabled>\n" +
                 "          <label class=\"form-check-label\" for=\"gridRadios1\">\n" +
                 "            1\n" +
                 "          </label>\n" +
                 "        </div>\n" +
                 "        <div class=\"form-check\">\n" +
-                "          <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\" value=\"option2\">\n" +
+                "          <input class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\" value=\"option2\" disabled>\n" +
                 "          <label class=\"form-check-label\" for=\"gridRadios2\">\n" +
                 "            2\n" +
                 "          </label>\n" +
@@ -66,7 +60,7 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
                 "  <div class=\"form-group row\">\n" +
                 "    <div class=\"col-sm-2\">Class: </div>\n" +
                 "    <div class=\"col-sm-3\">\n" +
-                "        <select class=\"form-control\">\n" +
+                "        <select class=\"form-control\" name=\"flightClass\">\n" +
                 "               <option>Economy</option>\n" +
                 "               <option>Business</option>\n" +
                 "               <option>First Class</option>\n" +
