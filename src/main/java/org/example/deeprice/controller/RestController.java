@@ -43,8 +43,16 @@ public class RestController {
 
     @PostMapping("/ranking")
     public String ranking(@RequestParam(name = "prefAirlines", required = false) List<String> prefAirlines) {
-        //FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines);
-        //filterAirlineCommand.execute();
+        FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines);
+        filterAirlineCommand.execute();
+
+        ViewClient client = ViewClient.getViewClientInstance();
+        View view = client.createWebpage(Webpage.RANKING_PAGE);
+        return view.getViewContent();
+    }
+
+    @GetMapping("/rankings")
+    public String rankings() {
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.RANKING_PAGE);
         return view.getViewContent();
