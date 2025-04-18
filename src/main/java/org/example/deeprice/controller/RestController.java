@@ -42,8 +42,8 @@ public class RestController {
     }
 
     @PostMapping("/ranking")
-    public String ranking(@RequestParam(name = "prefAirlines", required = false) List<String> prefAirlines) {
-        FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines);
+    public String ranking(@RequestParam(name = "prefAirlines", required = false) List<String> prefAirlines, @RequestParam String luggageWeight) {
+        FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines, 23);
         filterAirlineCommand.execute();
 
         ViewClient client = ViewClient.getViewClientInstance();

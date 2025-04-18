@@ -53,6 +53,6 @@ public class HandleAPIRequestCommand implements Command {
         for(FlightJourney offer: offers) {
             System.out.println(offer);
         }
-        Results.FLIGHT_JOURNEY_LIST = offers;
+        Results.setFlightJourneyList(offers);
     }
 }

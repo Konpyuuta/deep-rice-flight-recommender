@@ -4,6 +4,7 @@ import org.example.deeprice.commands.Command;
 import org.example.deeprice.model.Airport;
 import org.example.deeprice.model.result.APIFlightResponse;
 import org.example.deeprice.model.result.FlightOffer;
+import org.example.deeprice.model.result.flight.AllowedLuggage;
 import org.example.deeprice.model.result.flight.Flight;
 import org.example.deeprice.model.result.flight.FlightItinerary;
 import org.example.deeprice.model.result.flight.FlightJourney;
@@ -61,6 +62,21 @@ public class ParseAPIResponseCommand implements Command {
                 flightItinerary.setHasLayover(flightItinerary.getFlights().size() > 1);
                 journey.addFlightItinerary(flightItinerary);
 
+            }
+            JSONArray travelerPricings = flight.getJSONArray("travelerPricings");
+            for(int h = 0; h < travelerPricings.length(); h++) {
+                JSONObject travelerPricing = travelerPricings.getJSONObject(h);
+                JSONArray fareDetails = travelerPricing.getJSONArray("fareDetailsBySegment");
+                for(int l = 0; l < fareDetails.length(); l++) {
+                    JSONObject fareDetail = fareDetails.getJSONObject(l);
+                    JSONObject bags = fareDetail.getJSONObject("includedCheckedBags");
+
+                    Integer quantity = bags.optInt("quantity", 0);
+                    Integer weight = bags.optInt("weight", -1);
+                    String unit = bags.optString("weightUnit", "N/A");
+                    AllowedLuggage allowedLuggage = new AllowedLuggage(quantity, weight, unit);
+                    journey.setAllowedLuggage(allowedLuggage);
+                }
             }
             flightJourneys.add(journey);
         }

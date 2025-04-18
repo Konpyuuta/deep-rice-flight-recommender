@@ -16,6 +16,8 @@ public class FlightJourney {
 
     private Double price;
 
+    private AllowedLuggage allowedLuggage;
+
     public FlightJourney(String journeyId, List<FlightItinerary> flightItineraries, Double price) {
         this.journeyId = journeyId;
         this.flightItineraries = flightItineraries;
@@ -24,6 +26,14 @@ public class FlightJourney {
 
     public FlightJourney() {
 
+    }
+
+    public void setAllowedLuggage(AllowedLuggage allowedLuggage) {
+        this.allowedLuggage = allowedLuggage;
+    }
+
+    public AllowedLuggage getAllowedLuggage() {
+        return allowedLuggage;
     }
 
     public void setFlightItineraries(List<FlightItinerary> flightItineraries) {

@@ -29,7 +29,7 @@ public class HTMLStandardEphemeralPreferences extends HTMLEphemeralPreferences {
     @Override
     protected void initializeContent() {
         content = "<h1 class=\"text-center\">Ephemeral Preferences</h1>\n" +
-                "<div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\">\n" +
+                "<div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><form action=\"/ranking\" method=\"post\">\n" +
                 "    <label for=\"luggage-weight\" class=\"form-label\">How much does your luggage weight?</label>\n" +
                 "    <div class=\"input-group mb-3\">\n" +
                 "        <div class=\"input-group-prepend\">\n" +
@@ -38,7 +38,7 @@ public class HTMLStandardEphemeralPreferences extends HTMLEphemeralPreferences {
                 "                <a class=\"dropdown-item\" href=\"#\">In Lb</a>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
-                "        <input type=\"text\" class=\"form-control\" aria-label=\"Your height with different metric options\">\n" +
+                "        <input type=\"text\" name=\"luggageWeight\" class=\"form-control\" aria-label=\"Your height with different metric options\">\n" +
                 "    </div>\n" +
                 "    <br>\n" +
                 "    <label class=\"form-label\">Which airlines do you prefer?</label>\n";
@@ -55,14 +55,14 @@ public class HTMLStandardEphemeralPreferences extends HTMLEphemeralPreferences {
             content += "<br>\n" +
                 "    <hr/>\n" +
                 "    <br>\n" +
-                "    <button type=\"button\" class=\"btn btn-primary\">Save preferences</button>\n" +
-                "</div>";
+                "    <button type=\"submit\" class=\"btn btn-primary\">Save preferences</button>\n" +
+                "</form></div>";
     }
 
     private Map<String, String> extractValableAirlines() {
         GraphDBConnector graphDBConnector = GraphDBConnector.getInstance();
         Map<String, String> airlines = new HashMap<>();
-        List<FlightJourney> flightJourneys = Results.FLIGHT_JOURNEY_LIST;
+        List<FlightJourney> flightJourneys = Results.getFlightJourneyList();
         for(FlightJourney flightJourney : flightJourneys) {
             for(FlightItinerary itinerary : flightJourney.getFlightItineraries()) {
                 for(Flight flight : itinerary.getFlights()) {
