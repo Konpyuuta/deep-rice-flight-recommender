@@ -21,7 +21,13 @@ Factory}, 1(1):1--2, February 2006. }
 \maketitle
 
 \begin{abstract}
-The rapid growth in global air travel has led to an unprecedented number of available flight options, creating significant challenges for travelers in selecting flights best suited to their preferences. Conventional flight booking and recommendation systems provide basic filtering mechanisms but often lack the capacity to manage imprecision and ambiguity in user preferences. This report proposes a fuzzy logic-based flight recommendation system capable of interpreting and reasoning with vague, linguistic input such as 'cheap', 'early morning', 'short layover', and 'good airline'. Through a comprehensive literature review, system modeling, and fuzzy inference design, this report documents the process of developing a system prototype, offering an effective decision-support tool in the domain of air travel.
+In the modern digital travel landscape, the abundance of flight options has made the selection of the most suitable itinerary an increasingly complex task for travelers. Although online travel platforms offer various filters such as price, departure time, and airline preference, they often lack the flexibility to accommodate the subjective and imprecise nature of human preferences. For example, terms like "cheap flight," "early departure," or "good airline" lack strict definitions and vary in meaning from person to person. Current recommendation systems primarily rely on crisp logic, forcing users to make rigid selections, which limits the personalization and flexibility of the booking process.
+
+This report proposes a flight recommendation system that integrates fuzzy logic to address the inherent vagueness in user inputs and better simulate human reasoning. Fuzzy logic, a mathematical approach introduced by Lotfi Zadeh, allows for the modeling of imprecise information through fuzzy sets, membership functions, and inference rules. Using fuzzy logic, the proposed system interprets qualitative user preferences and transforms them into actionable outputs to generate ranked flight recommendations.
+
+The core components of the system include fuzzification of input parameters such as flight price, duration, number of stops, departure time, and airline rating; a rule-based inference engine; and a defuzzification process to derive crisp results. The system is evaluated through comparative testing against conventional filtering approaches to demonstrate improvements in user satisfaction and preference alignment.
+
+This project aims to enhance the user experience by bridging the gap between natural language input and algorithmic decision making. It offers a scalable solution that can be integrated into existing travel platforms, thereby increasing their adaptability to human decision styles. The result is a more intuitive and effective flight recommendation system that supports better-informed travel decisions through intelligent fuzzy logic-based reasoning.
 
 \keywords{Master thesis report, Human-IST Research Institute}
 \end{abstract}
@@ -31,21 +37,27 @@ The rapid growth in global air travel has led to an unprecedented number of avai
 \newpage
 
 \section{Background and Motivation}
-Air travel has become a pivotal part of modern life, with millions of passengers traveling domestically and internationally every day. The unprecedented expansion of the airline industry has resulted in a profusion of options for travelers. From pricing structures and flight durations to stopovers and airline ratings, customers are inundated with choices.
+The airline industry is a dynamic and rapidly expanding sector characterized by a vast network of routes, airlines, flight classes, and pricing structures. With the growing availability of international and domestic flights, modern travelers face an overwhelming number of choices when planning their trips. Whether booking a flight for business, leisure, or emergency purposes, users are expected to sift through numerous combinations of airlines, layovers, prices, departure times, and durations. As this decision-making process becomes increasingly complex, the need for intelligent recommendation systems that can simplify the user experience is more critical than ever.
 
-Existing online travel agencies (OTAs) and flight booking platforms typically offer filtering options for sorting flights by factors like price, departure time, duration, and number of stops. However, these systems rely heavily on precise numerical inputs and fail to handle qualitative or ambiguous user preferences. For example, while a system might allow a user to set a maximum price of 500 USD, it cannot effectively interpret a preference for a 'reasonably priced' flight.
+Most current flight booking platforms such as Skyscanner, Expedia, or Google Flights provide users with the ability to filter results based on a set of predetermined, crisp parameters---such as ``price less than \$500,'' ``non-stop flights only,'' or ``departure before 10 AM.'' While these filters are useful, they require the user to have clearly defined preferences and a good understanding of the trade-offs between different flight attributes. More importantly, they lack the flexibility to interpret and respond to vague or linguistic input that users often express naturally. For example, a traveler may not know exactly what constitutes an ``early'' flight or what is considered a ``reasonable'' layover, but they will still express preferences in those terms.
 
-The need for more human-centered, intelligent recommendation systems has been highlighted in recent research. The challenge lies in mimicking human reasoning and decision-making when dealing with subjective and vague preferences.
+This gap between human expression and machine understanding creates friction in the decision-making process and can lead to user dissatisfaction. Users are often forced to manually experiment with multiple filters and settings before finding a satisfactory option, wasting time and possibly settling for less-than-ideal choices. To address this issue, we propose a flight recommendation system that integrates fuzzy logic, a methodology specifically designed to deal with imprecision and uncertainty.
 
-Fuzzy logic, introduced by Lotfi Zadeh in 1965, offers a compelling solution to this problem by allowing systems to handle data that is imprecise or uncertain. Unlike traditional binary logic, fuzzy logic supports reasoning with degrees of truth, making it an ideal tool for applications where ambiguity is intrinsic.
+Fuzzy logic, introduced by Lotfi Zadeh in the 1960s, extends classical Boolean logic by allowing variables to take on a range of values between 0 and 1, rather than binary true/false outcomes. This makes it an ideal approach for modeling the ambiguity found in human reasoning. By implementing fuzzy sets and membership functions for flight attributes such as 'cheap', 'moderate' and 'expensive' prices, or 'early', 'midday' and 'late' departures, the system can interpret and reason with user preferences expressed in natural language.
 
-This project aims to leverage fuzzy logic to create a more intuitive and user-friendly flight recommendation system, enabling users to express their preferences naturally and receive suitable flight suggestions accordingly.
+In addition, a fuzzy inference engine can apply a set of linguistic rules, defined by domain experts or extracted from user behavior, to evaluate flight options and produce personalized recommendations. This type of decision-support system not only mimics human thinking but also increases usability by reducing the cognitive load on users. They no longer need to quantify their preferences precisely; instead, they can describe what they want intuitively.
+
+The motivation for this project arises from the desire to bridge the gap between rigid computational models and the flexible, imprecise nature of human preferences. By applying fuzzy logic to the domain of flight recommendations, we aim to enhance the decision-making process for users, improve satisfaction, and offer a system that adapts to the complexity and subjectivity inherent in travel planning.
 
 \section{Problem Statement and Research Questions}
 \subsection{Problem Statement}
-Current flight recommendation and booking systems rely primarily on precise numerical inputs and rule-based filters. These systems are not well-equipped to handle the inherent ambiguity in human preferences. Terms such as 'cheap', 'prefer early morning flights', or 'reasonable layover duration' are inherently subjective and difficult to interpret using traditional systems.
+In today's digital era, travelers are overwhelmed with an abundance of flight options available through numerous online travel agencies such as Skyscanner, Google Flights, and Expedia. These platforms offer users a range of filtering options based on fixed, quantitative criteria like price, number of stops, departure time, and flight duration. While these filters are helpful for users with clearly defined travel requirements, they fall short when users express preferences in vague or subjective terms such as "affordable," "early flight," or "good airline."
 
-The absence of systems capable of processing such qualitative preferences leads to a suboptimal user experience, especially for casual travelers who may not know specific numerical criteria but have general preferences. Incorporating fuzzy logic into a recommendation system offers a way to bridge this gap, providing recommendations that align more closely with the natural language and thought processes of users.
+Most conventional flight recommendation systems rely on crisp logic and deterministic algorithms that do not accommodate imprecision or ambiguity in user preferences. This limitation reduces their ability to deliver recommendations aligned with the actual intent or comfort level of the user. For example, a traveler who prefers "short layovers" may receive options with long waiting times simply because the system cannot interpret qualitative terms.
+
+This gap highlights the need for a more flexible and human-centric approach to recommendation. Fuzzy logic, with its ability to model approximate reasoning and linguistic uncertainty, presents a promising solution. It allows the system to interpret vague preferences and make informed decisions even in the presence of incomplete or imprecise input.
+
+Therefore, the core problem addressed in this report is how to design and implement a fuzzy logic-based flight recommendation system that accurately captures and responds to linguistic user preferences, thereby enhancing decision-making, user satisfaction, and overall travel planning experience.
 
 \subsection{Research Questions}
 \begin{itemize}
@@ -62,48 +74,142 @@ The absence of systems capable of processing such qualitative preferences leads 
 
 \section{Objectives and Expected Output}
 \subsection{Objectives}
-The primary objectives of this thesis include:
-\begin{itemize}
-\item To identify and analyze key parameters that influence traveler preferences when booking flights.
-\item To define fuzzy sets and corresponding membership functions for these parameters.
-\item To construct a fuzzy rule base reflecting human reasoning and decision-making in flight selection.
-\item To design and implement a fuzzy inference system prototype capable of interpreting vague user preferences.
-\item To compare and evaluate the effectiveness of the fuzzy-based system with existing conventional systems.
-\end{itemize}
+The primary goal of this thesis is to develop a flight recommendation system that incorporates fuzzy logic to interpret and process imprecise or linguistically vague user preferences. In contrast to traditional systems that rely solely on deterministic rules and rigid filters, this project seeks to emulate human-like decision-making in flight selection. The specific objectives are as follows:
 
-\subsection{Expected Output}
-Upon completion, this thesis will deliver:
-\begin{itemize}
-\item A comprehensive analysis of flight selection parameters and their fuzzy representations.
-\item A structured rule base capturing the nuances of human flight selection logic.
-\item A working prototype of a fuzzy logic-based recommendation system.
-\item A detailed performance evaluation report comparing fuzzy-based recommendations with those from existing systems.
-\end{itemize}
-
-\section{Proceeding and Method}
-This project adopts a systematic methodology combining theoretical analysis with practical system development. The key stages include:
 \begin{enumerate}
-\item Extensive literature review on fuzzy logic, decision support systems, and recommendation systems.
-\item Identification of critical flight selection parameters via market analysis, expert interviews, and user surveys.
-\item Definition of fuzzy sets and membership functions for each parameter.
-\item Development of a fuzzy rule base using expert knowledge and user data.
-\item Implementation of a prototype system using a suitable development environment.
-\item Testing and comparative evaluation against traditional systems.
-\item Documentation and reporting of results, findings, and recommendations.
+\item \textbf{To analyze and identify the most influential parameters involved in flight selection: }
+A foundational step in the development process is understanding how travelers make decisions. This involves reviewing literature, surveying users, and analyzing existing platforms to identify critical parameters that influence flight choice. These typically include price, departure time, duration, number of stops, and airline reputation. Each parameter must be carefully evaluated to determine its relevance and potential for fuzzy representation.
+
+\item \textbf{To design fuzzy sets and membership functions for each identified parameter: }
+Once parameters are defined, appropriate fuzzy sets (e.g., “cheap,” “moderate,” “expensive” for price) and corresponding membership functions (e.g., triangular or trapezoidal) will be developed. These functions will quantify linguistic terms in a way that the fuzzy inference system can interpret and act upon.
+
+\item \textbf{To construct a comprehensive fuzzy rule base reflecting realistic user preferences: }
+A critical component of the system is the rule base, which encodes the logic by which user preferences are translated into recommendations. These rules, expressed in the form “IF...THEN...”, simulate expert knowledge or user reasoning, such as “IF price is cheap AND airline rating is good THEN preference is high.”
+
+\item \textbf{To develop a fuzzy inference system integrating all components: }
+A functional inference system will be implemented using a suitable framework or programming environment. The system will accept fuzzy inputs, apply the rule base, and produce output recommendations after defuzzification.
+
+\item \textbf{To evaluate the system through test scenarios and compare it with traditional recommendation methods: }
+The effectiveness of the fuzzy system will be validated by comparing it with conventional filter-based systems. Evaluation metrics may include user satisfaction, alignment with user expectations, flexibility, and interpretability.
+
 \end{enumerate}
 
-\section{Literature Review}
-\subsection{Recommendation Systems Overview}
-Recommendation systems suggest relevant items to users based on data analysis. They are ubiquitous in e-commerce, video streaming, and travel services. Traditional methods include collaborative filtering, content-based filtering, and hybrid systems.
+\subsection*{Expected Output}
 
-\subsection{Fuzzy Logic in Decision Support}
-Fuzzy logic has been widely applied in fields requiring decision-making under uncertainty, including healthcare, risk assessment, and engineering. In recommendation systems, it allows systems to handle linguistic terms such as 'affordable', 'preferred', or 'high quality'.
+The expected outcome of this thesis is the successful development of a working prototype of a fuzzy logic-based flight recommendation system that meets the stated objectives. Specifically, the deliverables will include:
 
-\subsection{Flight Recommendation Platforms}
-Popular platforms like Expedia, Skyscanner, and Google Flights employ filtering systems based on numerical input. None of these systems offer qualitative reasoning capabilities based on fuzzy logic.
+A clearly defined and documented set of flight selection parameters represented as fuzzy variables.
 
-\subsection{Identified Research Gaps}
-While fuzzy logic has been applied in areas like restaurant and healthcare recommendations, its use in flight booking remains limited, creating an opportunity for innovation.
+Well-structured fuzzy membership functions and a robust fuzzy rule base.
+
+A working fuzzy inference system capable of interpreting vague or ambiguous preferences and converting them into ranked flight recommendations.
+
+A user interface (UI) or demonstration environment where users can input preferences in linguistic terms and receive personalized suggestions.
+
+A comprehensive evaluation report that details the performance of the system in simulated scenarios, its benefits over conventional systems, and its limitations.
+
+A written thesis document encapsulating all design choices, development processes, methodologies, and outcomes.
+
+By achieving these deliverables, the project aims to demonstrate that fuzzy logic can be a powerful tool in enhancing the decision-making process for travelers, especially in scenarios where human judgment and flexibility are essential.
+
+\section*{Proceedings and Method}
+
+The development of a fuzzy logic-based flight recommendation system requires a systematic approach that integrates both theoretical research and practical implementation. The following outlines the detailed methodology adopted in this project:
+
+\subsection*{1. Literature Review and Theoretical Foundation}
+
+The first step in the process is conducting a thorough literature review. This involves studying existing flight recommendation systems, understanding their architecture and limitations, and exploring the theoretical concepts of fuzzy logic. Special focus is given to research papers and case studies where fuzzy logic has been applied in decision-making or recommendation systems. This review helps to identify gaps in the existing technologies and to shape the conceptual foundation for the proposed system.
+
+Furthermore, existing commercial platforms such as Skyscanner, Google Flights, and Expedia are analyzed to understand how they process user preferences. These platforms typically rely on crisp filters and deterministic logic, which do not account for user uncertainty. The goal here is to highlight the potential improvement that fuzzy logic can provide.
+
+\subsection*{2. Parameter Identification and Requirement Analysis}
+
+A key step in the methodology is identifying the parameters that significantly influence flight selection. This is achieved through surveys, user interviews, and analysis of user behavior on flight booking platforms. Parameters such as price, flight duration, number of stops, departure time, and airline rating are selected based on their importance to users.
+
+Each parameter is studied to determine its fuzzy nature. For instance, “cheap” or “expensive” for price, “short” or “long” for duration, and “early morning” or “late night” for departure times. This step ensures that the most meaningful and subjective aspects of flight choice are captured for fuzzy modeling.
+
+\subsection*{3. Design of Fuzzy Sets and Membership Functions}
+
+In this phase, fuzzy sets are defined for each selected parameter. For example, the price parameter may include fuzzy sets such as “cheap,” “moderate,” and “expensive.” Membership functions are then designed to map real-world numerical values into these fuzzy sets. The triangular, trapezoidal, or Gaussian functions are chosen based on the parameter characteristics and user interpretation.
+
+Each fuzzy set and its membership function are carefully calibrated, often using empirical data or expert opinion, to reflect real-world perceptions. For example, a flight costing \$100 might be considered highly “cheap,” while one costing \$800 might belong more to the “expensive” set with a high degree of membership.
+
+\subsection*{4. Construction of Fuzzy Rule Base}
+
+The rule base is the core of the fuzzy inference system and is composed of a series of “IF–THEN” rules that simulate human reasoning. These rules are developed based on common user preferences. For instance:
+
+\begin{quote}
+\textit{IF price is cheap AND airline rating is high AND number of stops is none THEN recommendation is strong.}
+\end{quote}
+
+Rules are derived through expert input, user surveys, and data-driven patterns observed in travel preferences. A comprehensive rule base allows the system to consider various combinations of user preferences and provide nuanced recommendations.
+
+\subsection*{5. System Architecture Design}
+
+A modular system architecture is designed to integrate all components seamlessly. The system consists of:
+
+\begin{itemize}
+    \item \textbf{Input Module:} Collects user preferences, often in linguistic form (e.g., “cheap flight,” “early departure”).
+    \item \textbf{Fuzzification Module:} Converts crisp user inputs into fuzzy values using the predefined membership functions.
+    \item \textbf{Inference Engine:} Applies the fuzzy rule base to the fuzzy inputs to derive fuzzy outputs.
+    \item \textbf{Defuzzification Module:} Converts the fuzzy outputs into crisp values that can be used for ranking flight options.
+    \item \textbf{Output Module:} Displays a ranked list of recommended flights based on the fuzzy inference results.
+\end{itemize}
+
+\subsection*{6. System Implementation}
+
+The system is implemented using a suitable programming language and framework—typically Python with libraries like scikit-fuzzy, or MATLAB’s Fuzzy Logic Toolbox. The fuzzy logic controller is developed, and a basic user interface (command-line or web-based) is created for interaction.
+
+Flight data is sourced from publicly available datasets or simulated to validate the system. Each flight option is evaluated against the user’s fuzzy preferences to compute a recommendation score.
+
+\subsection*{7. Testing and Evaluation}
+
+After implementation, the system undergoes rigorous testing. Various test cases are designed to represent different user scenarios—such as a user who values low cost over comfort or another who prefers quality airlines regardless of cost.
+
+The system’s outputs are compared to those of traditional filtering systems. Evaluation metrics include:
+
+\begin{itemize}
+    \item \textbf{User Satisfaction:} Collected through surveys where users assess how well the recommendations match their expectations.
+    \item \textbf{Flexibility:} Ability to interpret vague input and offer meaningful output.
+    \item \textbf{Accuracy:} How well the fuzzy system prioritizes flights in line with user goals.
+\end{itemize}
+
+\subsection*{8. Documentation and Reporting}
+
+The final phase involves documenting every aspect of the project, including methodology, system architecture, rule base structure, design decisions, challenges faced, and evaluation results. The final report serves both as academic documentation and a technical reference for future extensions or real-world deployment.
+
+
+
+\section*{Literature Research}
+
+The application of fuzzy logic in decision-making processes related to airline services and passenger preferences has been explored extensively in academic research. This section reviews key literature that forms the foundation of this project, focusing on how fuzzy methodologies can be applied to enhance flight recommendation systems and passenger satisfaction models.
+
+\subsection*{1. Evaluation of Airline Service Quality Using Fuzzy MCDM}
+
+The study by Tsaur, Chang, and Yen (2002) titled \textit{The Evaluation of Airline Service Quality by Fuzzy MCDM} provides a comprehensive framework for evaluating airline service quality using a multi-criteria decision-making (MCDM) approach embedded with fuzzy logic \cite{tsaur2002evaluation}. The research argues that traditional quantitative methods are inadequate for capturing the vagueness and ambiguity inherent in passenger judgments. The authors propose a fuzzy analytic hierarchy process (FAHP) and fuzzy TOPSIS to prioritize service quality dimensions such as flight safety, timeliness, comfort, and in-flight services.
+
+This study highlights the importance of fuzzy methods in handling subjective assessments, which are inherently imprecise. It also illustrates how fuzzy logic can integrate linguistic variables like “very important” or “moderately satisfactory” to provide a more human-centric evaluation model. The methodology proposed in this research directly influences the design of the fuzzy rule base in our project, particularly in converting subjective preferences into system-understandable values.
+
+\subsection*{2. Passenger Service Improvement Using Fuzzy QFD}
+
+Another influential study by Hasibuan and Mustafa (2014), titled \textit{The Passenger Service Improvement Using Fuzzy QFD Based on Evidence Reasoning Approach}, applies the fuzzy Quality Function Deployment (QFD) technique to identify and improve critical passenger needs \cite{hasibuan2014passenger}. The research is grounded in the context of improving service for a domestic airline and uses fuzzy logic to evaluate customer satisfaction criteria under uncertainty.
+
+The significance of this research lies in its application of fuzzy logic to bridge the gap between customer voice and technical responses. Using fuzzy numbers and evidence reasoning, the study is able to prioritize improvements in areas such as check-in speed, staff friendliness, and baggage handling efficiency. For our project, this research supports the need for a fuzzy-driven recommendation system that dynamically adapts to subjective and changing customer expectations.
+
+\subsection*{3. Application of Fuzzy Set Theory in Airline Choice Modelling}
+
+The paper by Nikolić and Dujmović (2008) titled \textit{A Model of Passenger Airline Choice: Application of Fuzzy Set Theory} explores the application of fuzzy set theory to model passenger decision-making during airline selection \cite{nikolic2008model}. The authors assert that traveler decisions are not always based on crisp values or strict logic but are instead often vague and inconsistent. The research develops a fuzzy logic-based choice model that incorporates variables such as flight fare, convenience, schedule, and service quality.
+
+This model demonstrates how fuzzy logic can reflect human reasoning by enabling the use of linguistic terms and assigning degrees of preference, rather than binary choices. This is closely aligned with the objective of our project, which is to allow users to specify flexible, non-deterministic flight preferences and receive nuanced recommendations.
+
+\subsection*{Conclusion of Literature Review}
+
+The reviewed literature establishes a strong precedent for the use of fuzzy logic in modeling subjective preferences and enhancing decision-making processes in the airline industry. Each of these works validates the need for a system that can handle imprecision and ambiguity, and they collectively support the architectural and methodological choices made in this project. By building on the concepts presented in these studies, the proposed fuzzy logic-based flight recommendation system is positioned to provide a more user-centered, flexible, and intelligent service.
+
+\subsection*{Note: }
+
+These research papers are referenced for understanding different fuzzy logic methodologies. We used it to understand different methodologies and techniques, and then on the basis of our understanding, we have implemented our system.
+
 
 \section{Fuzzy Logic Fundamentals}
 \subsection{Introduction}
@@ -139,9 +245,8 @@ The proposed system consists of:
 Key parameters:
 \begin{itemize}
 \item Price
-\item Comfortability of User
+\item Preference
 \item Quality of food with respect to user's preference
-\item Smart Layover
 \item Flight Duration
 \item Airline Rating
 \end{itemize}
