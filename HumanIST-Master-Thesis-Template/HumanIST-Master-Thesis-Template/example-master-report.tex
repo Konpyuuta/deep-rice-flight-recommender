@@ -3,12 +3,12 @@
 
 \begin{document}
 
-\title{An example of the use of the master thesis report package}
+\title{Scientific Report for the M. Sc. Seminar in Social Computing}
 
-\author{Jean Hennebert\thanks{\email{jean.hennebert@unifr.ch}, DIVA group, DIUF, University of Fribourg}
-   \and Sergei Rachmaninov\thanks{\email{serge.rachmaninov@piano.ch}, Piano Department, Concerto University}}
+\author{Maurice Amon\thanks{\email{maurice.amon@students.unibe.ch}, Student @ Swiss Joint Master in Computer Science}
+   \and Deep Shukla\thanks{\email{deep.shukla@students.unibe.ch}, Student @ Swiss Joint Master in Computer Science}}
 
-\date{February 12, 2006} % Note: if this is left out, today's date will be used.
+\date{May 22, 2025} % Note: if this is left out, today's date will be used.
 
 % The following field is optional. It can be used for indicating that the
 % report has now been accepted for another publication.
@@ -232,6 +232,148 @@ The Mamdani and Sugeno models are widely used for inference. Mamdani models are 
 
 \section{System Design and Methodology}
 \subsection{System Architecture}
+In this chapter we'll give an in-detail explanation of the system's architecture for the purpose of transparency.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fr-system.drawio.png}
+    \caption{The Flight Recommender's System pipeline}
+    \label{fig:pipeline}
+\end{figure}
+
+\subsubsection{Recording Longterm preferences}
+
+The pipeline starts with asking the user for his more longterm preferences, as stated in <chapter before> we include here five different controls:
+
+\begin{enumerate}
+    \item How important is the flight time to me when booking a flight?
+    \item How important is the customer service in the aircraft to me?
+    \item How important is the seat comfortability to me?
+    \item How important is the Quality of the food served in the aircraft to me?
+    \item How tall are you?
+\end{enumerate}
+
+The controls for the first four questions are using sliders that are divided by 5 levels from 1 to 5. We'be mentioned it in a chapter before but for the purpose of completeness I'll state the interpretation of those 5 levels here again:
+
+\begin{itemize}
+    \item First Level: Not important at all.
+    \item Second Level: Not that important.
+    \item Third Level: Neutral, No particular feelings to this preference.
+    \item Fourth Level: Somewhat important.
+    \item Fifth Level: Highly important.
+\end{itemize}
+
+The fifth control does allow to enter the exact height of the user (in cm) and is used for determining if he needs more space for his legs. After the user has entered his longterm preferences he can submit the form. The system then saves his preferences internally (but not persistently, when shutting down the application the data will be lost) and redirects him to the form where he can decide where his journey starts and ends. The form for choosing the flight allows to specify the following items:
+
+\begin{enumerate}
+    \item Start airport.
+    \item Destination airport.
+    \item Checkbox for direct or layover flight.
+    \item Departure Date
+    \item Flight Class (Economy, Business or First class)
+\end{enumerate}
+
+After the user has submitted the form the system generates an API Request to the Amadeus Flight Offer API with the choosen parameters as GET-Variables and internally saves them in a list. Eventually, it also extracts the airlines involved in a Flight (layover or direct) as well as the max. allowed luggage-weight and saves them. In a next step, the extracted airlines are presented in a check-box list to the user where he can choose if he has a specific preference for an airline. In case he doesn't have one, he can check the checkbox at the top "No preference". He can also enter his expected luggage weight. After the user submits the form the system discards all airlines that have not been selected from the internal flight list or that do not meet the weight requirement for the luggage. It's important to mention that the ephemeral preferences are not saved by the system.
+
+\subsubsection{Prediction Generation}
+
+After the user has submitted his ephemeral preferences, the system now takes the values of all eternal preferences and generates a prediction score for each flight. The higher the predicition score, the higher a flight will appear in the presented Top-N-Ranking. In the following chapter the functions that are in charge of generating the prediction the prediction scores are explained.
+
+\[
+\mu = \frac{1}{N} \sum_{i=1}^{N} x_i
+\]
+
+\[
+s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+\]
+
+\vspace{0.5cm}
+
+\begin{tabular}{ |p{3.5cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Predicition Table: Flighttime Preference} \\
+ \hline
+ Flighttime Preference & - 2SD & - 1SD & 0 SD & + 1SD & + 2SD\\
+ \hline
+ 1 Point   & 0.0    & 0.0 & 0.0 & 0.0 & 0.0 \\
+ 2 Point &   -0.2  & 0.0   & 0.0 & 0.2 & 0.4 \\
+ 3 Point & -0.6 & -0.4 &  0.0 & 0.4 & 0.6\\
+ 4 Point & -0.8   & -0.6 & -0.2 &  0.6 & 0.8\\
+ 5 Point & -1.0  & -0.8 & -0.4 & 0.8 & 1.0\\
+
+ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+The columns represent how many standard deviations the flightime for a specific flight deviates from the mean. The rows on the other hand represent the importance-rating that the user has given to the flighttime preference control.
+
+
+And here we take a look at the table for the function that calculates the prediction score for the price:
+
+\vspace{0.5cm}
+
+\begin{tabular}{ |p{3.5cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Predicition Table: Price Preference} \\
+ \hline
+ Price Preference & - 2SD & - 1SD & 0 SD & + 1SD & + 2SD\\
+ \hline
+ 1 Point   & 0.0    & 0.0 & 0.0 & 0.0 & 0.0 \\
+ 2 Point &   -0.2  & 0.0   & 0.0 & 0.2 & 0.4 \\
+ 3 Point & -0.6 & -0.4 &  0.0 & 0.4 & 0.6\\
+ 4 Point & -0.8   & -0.6 & -0.2 &  0.6 & 0.8\\
+ 5 Point & -1.0  & -0.8 & -0.4 & 0.8 & 1.0\\
+
+ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+
+\vspace{0.5cm}
+
+\begin{tabular}{ |p{3.5cm}||p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Predicition Table: Height and Legroom} \\
+ \hline
+ Legroom rating & - 2SD & - 1SD & 0 SD & + 1SD & + 2SD\\
+ \hline
+ 1 Point   & 0.0    & 0.0 & 0.0 & 0.0 & 0.0 \\
+ 2 Point &   -0.2  & 0.0   & 0.0 & 0.2 & 0.4 \\
+ 3 Point & -0.6 & -0.4 &  0.0 & 0.4 & 0.6\\
+ 4 Point & -0.8   & -0.6 & -0.2 &  0.6 & 0.8\\
+ 5 Point & -1.0  & -0.8 & -0.4 & 0.8 & 1.0\\
+
+ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+For these calculations we are not taking a preference but the height of the user in order to determine how much space he'll need for his legs. As of now, to our knowledge there are no publicly avaiable database containing the legroom space for each airline, which is why, we are using the user ratings from TripAdvisor as reference. Customers on the platform can rate the avaiable legroom of the airline.
+
+In the following the predicition calculations for the eternal preferences are explained.
+
+\vspace{0.5cm}
+
+\begin{tabular}{ |p{3.5cm}||p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|}
+ \hline
+ \multicolumn{10}{|c|}{Predicition Table: Customerservice Preference} \\
+ \hline
+ Eternal Preferences & 1.0 & 1.5 & 2.0 & 2.5 & 3.0 & 3.5 & 4.0 & 4.5 & 5.0 \\
+ \hline
+ 1 Point   & 0.0    & 0.0 & 0.0 & 0.0 & 0.0 & 0.0    & 0.0 & 0.0 & 0.0 \\
+ 2 Point & -0.3  & -0.2   & -0.1 & 0.0 & 0.1 & 0.2 & 0.3 & 0.4 & 0.5  \\
+ 3 Point & -0.6 & -0.4 &  -0.2 & -0.1 & 0.0 & 0.2 & 0.4 & 0.6 & 0.8\\
+ 4 Point & -0.8   & -0.6 & -0.4 &  -0.3 & -0.2 & -0.1 & 0.4 & 0.6 &  0.8\\
+ 5 Point & -1.0  & -0.8 & -0.6 & -0.4 & -0.2 & 0.4 & 0.6 & 0.8 & 1.0\\
+
+ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+Let \mathbb{X} = $\{1, 2, 3, 4, 5\}$ be the set of all plausible user ratings for the eternal preferences and $\mathbb{Y} = \{1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0 \}$ be the set of the airline ratings. The set I is defined as the cartesian product of X and Y: $\mathbb{I} = \mathbb{X} \times \mathbb{Y}$. Then the prediction function is defined as follows: $f \colon \mathbb{I} \to \mathbb{[0, 1]}.$ The function values in dependence of the input are illustrated in the function's table.
 The proposed system consists of:
 \begin{itemize}
 \item Input Module
