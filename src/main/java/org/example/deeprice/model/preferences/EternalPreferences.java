@@ -17,6 +17,10 @@ public class EternalPreferences {
 
     private Double customerServicePreference;
 
+    private Double flightTimePreference;
+
+    private Double pricePreference;
+
     private static EternalPreferences instance;
 
     private EternalPreferences() {
@@ -28,6 +32,14 @@ public class EternalPreferences {
             instance = new EternalPreferences();
         }
         return instance;
+    }
+
+    public void setPricePreference(Double pricePreference) {
+        this.pricePreference = pricePreference;
+    }
+
+    public Double getPricePreference() {
+        return pricePreference;
     }
 
     public Height getHeight() {
@@ -59,6 +71,14 @@ public class EternalPreferences {
 
     public void setCustomerServicePreference(Double customerServicePreference) {
         this.customerServicePreference = customerServicePreference;
+    }
+
+    public Double getFlightTimePreference() {
+        return flightTimePreference;
+    }
+
+    public void setFlightTimePreference(Double flightTimePreference) {
+        this.flightTimePreference = flightTimePreference;
     }
 
     public void destroyInstance() {

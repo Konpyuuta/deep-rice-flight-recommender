@@ -49,7 +49,7 @@ public class FuzzyHeight {
         if(height.getHeight() >= 170 && height.getHeight() < 185) {
             midDegree = (height.getHeight() - 170) / 15.0;
         } else if(height.getHeight() >= 185 && height.getHeight() < 190) {
-            midDegree = (190 - height.getHeight()) / 15.0;
+            midDegree = (190 - height.getHeight()) / 5.0;
         } else {
             midDegree = 0.0;
         }
@@ -66,5 +66,9 @@ public class FuzzyHeight {
             largeDegree = 1.0;
         }
         return largeDegree;
+    }
+
+    public Double[] getFuzzyArray() {
+        return fuzzyMap.get(height);
     }
 }

@@ -1,5 +1,6 @@
 package org.example.deeprice.view.components.ephemeral;
 
+import org.example.deeprice.ProjectConstants;
 import org.example.deeprice.model.graphdb.GraphDBConnector;
 import org.example.deeprice.model.result.flight.Flight;
 import org.example.deeprice.model.result.flight.FlightItinerary;
@@ -28,7 +29,14 @@ public class HTMLStandardEphemeralPreferences extends HTMLEphemeralPreferences {
 
     @Override
     protected void initializeContent() {
-        content = "<h1 class=\"text-center\">Ephemeral Preferences</h1>\n" +
+        content = "<div class=\"container py-5\"><nav aria-label=\"breadcrumb\">\n" +
+                "  <ol class=\"breadcrumb\">\n" +
+                "    <li class=\"breadcrumb-item\" aria-current=\"page\">" + ProjectConstants.ETERNAL_PREF_NAV + "</li>\n" +
+                "    <li class=\"breadcrumb-item\" aria-current=\"page\">Eternal Preferences</li>\n" +
+                "    <li class=\"breadcrumb-item\" aria-current=\"page\">Choose Flight</li>\n" +
+                "    <li class=\"breadcrumb-item active\" aria-current=\"page\">Ephemeral Preferences</li>   " +
+                "  </ol>\n" +
+                "</nav></div><h1 class=\"text-center\">Ephemeral Preferences</h1>\n" +
                 "<div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><form action=\"/ranking\" method=\"post\">\n" +
                 "    <label for=\"luggage-weight\" class=\"form-label\">How much does your luggage weight?</label>\n" +
                 "    <div class=\"input-group mb-3\">\n" +
@@ -41,10 +49,10 @@ public class HTMLStandardEphemeralPreferences extends HTMLEphemeralPreferences {
                 "        <input type=\"text\" name=\"luggageWeight\" class=\"form-control\" aria-label=\"Your height with different metric options\">\n" +
                 "    </div>\n" +
                 "    <br>\n" +
-                "    <label class=\"form-label\">Which airlines do you prefer?</label>\n";
+                "    <label class=\"form-label\">Are there Airlines you don't want to fly with? If so, deselect them.</label>\n";
         for(Map.Entry entry : airlines.entrySet()) {
             content +="<div class=\"form-check\">\n" +
-                    "     <input class=\"form-check-input\" type=\"checkbox\" name=\"prefAirlines\" value=\"" + entry.getKey().toString() + "\" id=\"" + entry.getKey().toString() + "\">\n" +
+                    "     <input class=\"form-check-input\" type=\"checkbox\" name=\"prefAirlines\" value=\"" + entry.getKey().toString() + "\" id=\"" + entry.getKey().toString() + "\" checked>\n" +
                     "     <label class=\"form-check-label\" for=\"flexCheckCheckedDisabled\">\n" +
                                 entry.getValue() + "\n" +
                     "     </label>\n" +

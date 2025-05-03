@@ -48,7 +48,6 @@ public class FlightSearchDocument extends View {
                 "<html lang=\"en\">\n";
         view += header.getHeader();
         view += "<body>\n\n";
-        view += navigation.getNavigation();
         view += account.getContent();
         view += flightchooser.getContent();
         view += footer.getFooter();

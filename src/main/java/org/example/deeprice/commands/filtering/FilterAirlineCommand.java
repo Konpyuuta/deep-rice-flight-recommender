@@ -33,17 +33,20 @@ public class FilterAirlineCommand implements Command {
         List<FlightJourney> flightJourneys = Results.getFlightJourneyList();
         List<FlightJourney> newList = new ArrayList<>();
         for(FlightJourney flightJourney : flightJourneys) {
-            if(flightJourney.getAllowedLuggage().getWeight() <= weight) {
-                newList.add(flightJourney);
-            } else {
-                for (FlightItinerary itinerary : flightJourney.getFlightItineraries()) {
-                    for (Flight flight : itinerary.getFlights()) {
-                        if (airlines.contains(flight.getCarrierCode())) {
-                            newList.add(flightJourney);
-                        }
+            for (FlightItinerary itinerary : flightJourney.getFlightItineraries()) {
+                Boolean isValid = true;
+                for (Flight flight : itinerary.getFlights()) {
+                    if (airlines.contains(flight.getCarrierCode()) && flightJourney.getAllowedLuggage().getWeight() <= weight) {
+
+                    } else {
+                        isValid = false;
                     }
                 }
+                if (isValid) {
+                    newList.add(flightJourney);
+                }
             }
+
         }
         Results.setFlightJourneyList(newList);
     }

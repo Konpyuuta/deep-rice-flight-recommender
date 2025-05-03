@@ -50,9 +50,6 @@ public class HandleAPIRequestCommand implements Command {
         ParseAPIResponseCommand parseAPIResponseCommand = new ParseAPIResponseCommand(response);
         parseAPIResponseCommand.execute();
         List<FlightJourney> offers = parseAPIResponseCommand.getFlightJourneys();
-        for(FlightJourney offer: offers) {
-            System.out.println(offer);
-        }
         Results.setFlightJourneyList(offers);
     }
 }

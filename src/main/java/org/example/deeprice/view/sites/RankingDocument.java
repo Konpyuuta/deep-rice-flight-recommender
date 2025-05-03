@@ -2,6 +2,7 @@ package org.example.deeprice.view.sites;
 
 import org.example.deeprice.view.GuiFactory;
 import org.example.deeprice.view.View;
+import org.example.deeprice.view.components.account.HTMLAccount;
 import org.example.deeprice.view.components.footer.HTMLFooter;
 import org.example.deeprice.view.components.header.HTMLHeader;
 import org.example.deeprice.view.components.navigation.HTMLNavigation;
@@ -18,7 +19,7 @@ public class RankingDocument extends View {
 
     private HTMLHeader header;
 
-    private HTMLNavigation navigation;
+    private HTMLAccount account;
 
     private HTMLRankingTopN topN;
 
@@ -31,7 +32,7 @@ public class RankingDocument extends View {
     @Override
     public void initializeComponents() {
         header = factory.createHTMLHeaderView();
-        navigation = factory.createHTMLNavigationView();
+        account = factory.createAccountView();
         topN = factory.createRankingTopNView();
         footer = factory.createHTMLFooterView();
     }
@@ -42,7 +43,7 @@ public class RankingDocument extends View {
                 "<html lang=\"en\">\n";
         view += header.getHeader();
         view += "<body>\n\n";
-        view += navigation.getNavigation();
+        view += account.getContent();
         view += topN.getContent();
         view += footer.getFooter();
         view += "</body>\n" +

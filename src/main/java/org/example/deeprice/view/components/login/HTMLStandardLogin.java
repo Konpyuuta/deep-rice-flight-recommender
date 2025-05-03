@@ -1,5 +1,7 @@
 package org.example.deeprice.view.components.login;
 
+import org.example.deeprice.ProjectConstants;
+
 public class HTMLStandardLogin extends HTMLLogin {
 
     public HTMLStandardLogin() {
@@ -8,7 +10,11 @@ public class HTMLStandardLogin extends HTMLLogin {
 
     @Override
     protected void initializeContent() {
-        login = "    \"<h1 class=\"text-center\">Login</h1><div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><form action=\"/start\" method=\"post\">\n" +
+        login = "<div class=\"container py-5\"><nav aria-label=\"breadcrumb\">\n" +
+                "  <ol class=\"breadcrumb\">\n" +
+                "    <li class=\"breadcrumb-item active\" aria-current=\"page\">" + ProjectConstants.ETERNAL_PREF_NAV + "</li>\n" +
+                "  </ol>\n" +
+                "</nav></div><h1 class=\"text-center\">Login</h1><div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><form action=\"/start\" method=\"post\">\n" +
                 "  <div class=\"form-group\">\n" +
                 "    <label for=\"inputName\">Username</label>\n" +
                 "    <input type=\"text\" class=\"form-control\" id=\"inputName\" name=\"inputName\" placeholder=\"Enter username\">\n" +

@@ -1,5 +1,7 @@
 package org.example.deeprice.view.components.chooser;
 
+import org.example.deeprice.ProjectConstants;
+
 /**
  *
  *
@@ -14,7 +16,13 @@ public class HTMLStandardFlightChooser extends HTMLFlightchooser {
 
     @Override
     protected void initializeContent() {
-        content = "<h1 class=\"text-center\">Find & Compare Flights Easily ✈\uFE0F</h1><br /><br /><div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><div class=\"hero\">\n" +
+        content = "<div class=\"container py-5\"><nav aria-label=\"breadcrumb\">\n" +
+                "  <ol class=\"breadcrumb\">\n" +
+                "    <li class=\"breadcrumb-item\" aria-current=\"page\">" + ProjectConstants.ETERNAL_PREF_NAV + "</li>\n" +
+                "    <li class=\"breadcrumb-item\" aria-current=\"page\">Eternal Preferences</li>\n" +
+                "    <li class=\"breadcrumb-item active\" aria-current=\"page\">Choose Flight</li>   " +
+                "  </ol>\n" +
+                "</nav></div><h1 class=\"text-center\">Find & Compare Flights Easily ✈\uFE0F</h1><br /><br /><div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\"><div class=\"hero\">\n" +
                 "        \n" +
                 "        <div class=\"search-box\">\n" +
                 "<form action=\"/ephemeral\" id=\"flightSearchForm\" method=\"post\">\n" +

@@ -46,9 +46,8 @@ public class EphemeralPreferencesDocument extends View {
                 "<html lang=\"en\">\n";
         view += header.getHeader();
         view += "<body>\n\n";
-        view += navigation.getNavigation();
-        view += preferences.getContent();
         view += account.getContent();
+        view += preferences.getContent();
         view += footer.getFooter();
         view += "</body>\n" +
                 "</html>";

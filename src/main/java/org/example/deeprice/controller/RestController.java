@@ -3,6 +3,7 @@ package org.example.deeprice.controller;
 
 import org.example.deeprice.commands.api.HandleAPIRequestCommand;
 import org.example.deeprice.commands.filtering.FilterAirlineCommand;
+import org.example.deeprice.commands.preparation.CreateRankingCommand;
 import org.example.deeprice.model.Airport;
 import org.example.deeprice.model.preferences.EternalPreferences;
 import org.example.deeprice.model.preferences.FlightPreferences;
@@ -43,9 +44,10 @@ public class RestController {
 
     @PostMapping("/ranking")
     public String ranking(@RequestParam(name = "prefAirlines", required = false) List<String> prefAirlines, @RequestParam String luggageWeight) {
-        FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines, 23);
+        FilterAirlineCommand filterAirlineCommand = new FilterAirlineCommand(prefAirlines, Integer.valueOf(luggageWeight));
         filterAirlineCommand.execute();
-
+        CreateRankingCommand createRankingCommand = new CreateRankingCommand(prefAirlines);
+        createRankingCommand.execute();
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.RANKING_PAGE);
         return view.getViewContent();
@@ -73,16 +75,18 @@ public class RestController {
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.ETERNAL_PREF_PAGE);
 
-        System.out.println("Name: " + inputName + " Email: " + inputMail);
+
         return view.getViewContent();
     }
 
     @PostMapping("/flight-search")
-    public String search(@RequestParam String flighttime, @RequestParam String customerservice, @RequestParam String seat, @RequestParam String height, @RequestParam String foodservice) {
+    public String search(@RequestParam String flighttime, @RequestParam String price, @RequestParam String customerservice, @RequestParam String seat, @RequestParam String height, @RequestParam String foodservice) {
         EternalPreferences eternalPreferences = EternalPreferences.getInstance();
-        eternalPreferences.setCustomerServicePreference(0.2*Integer.valueOf(customerservice));
-        eternalPreferences.setSeatComfortabilityPreference(0.2*Integer.valueOf(seat));
-        eternalPreferences.setFoodPreference(0.2*Integer.valueOf(foodservice));
+        eternalPreferences.setFlightTimePreference(1.0*Integer.valueOf(flighttime));
+        eternalPreferences.setPricePreference(1.0*Integer.valueOf(price));
+        eternalPreferences.setCustomerServicePreference(1.0*Integer.valueOf(customerservice));
+        eternalPreferences.setSeatComfortabilityPreference(1.0*Integer.valueOf(seat));
+        eternalPreferences.setFoodPreference(1.0*Integer.valueOf(foodservice));
         eternalPreferences.setHeight(new Height(Integer.valueOf(height)));
         ViewClient client = ViewClient.getViewClientInstance();
         View view = client.createWebpage(Webpage.FLIGHT_SEARCH_PAGE);
@@ -91,10 +95,6 @@ public class RestController {
 
     @PostMapping("/ephemeral")
     public String ephemeralSearch(@RequestParam String departureField, @RequestParam String arrivalField, @RequestParam String departureDateField, @RequestParam String flightClass) {
-        System.out.println("Departure" + departureField);
-        System.out.println("Arrival" + arrivalField);
-        System.out.println("Departure Date" + departureDateField);
-        System.out.println("FlightClass" + flightClass);
         FlightPreferences flightPreferences = FlightPreferences.getInstance();
         flightPreferences.setAdults(1);
         flightPreferences.setDepartureDateTime(departureDateField);

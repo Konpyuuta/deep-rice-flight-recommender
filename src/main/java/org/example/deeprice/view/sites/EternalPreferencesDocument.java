@@ -43,7 +43,6 @@ public class EternalPreferencesDocument extends View {
                 "<html lang=\"en\">\n";
         view += header.getHeader();
         view += "<body>\n\n";
-        view += navigation.getNavigation();
         view += account.getContent();
         view += preferences.getForm();
         view += footer.getFooter();

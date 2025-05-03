@@ -2,6 +2,8 @@ package org.example.deeprice.model.result.flight;
 
 import org.example.deeprice.model.Airport;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author Maurice Amon
@@ -21,6 +23,8 @@ public class Flight {
 
     private String flightId;
 
+    private Double[] ratings;
+
     public Flight(Airport departureAirport, Airport arrivalAirport, String departureTime, String arrivalTime, String carrierCode, String flightId) {
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
@@ -32,6 +36,14 @@ public class Flight {
 
     public Flight() {
 
+    }
+
+    public void setRatings(Double[] ratings) {
+        this.ratings = ratings;
+    }
+
+    public Double[] getRatings() {
+        return ratings;
     }
 
     public void setArrivalAirport(Airport arrivalAirport) {
@@ -67,11 +79,11 @@ public class Flight {
     }
 
     public String getDepartureTime() {
-        return departureTime;
+        return LocalDateTime.parse(departureTime).toLocalTime().toString();
     }
 
     public String getArrivalTime() {
-        return arrivalTime;
+        return LocalDateTime.parse(arrivalTime).toLocalTime().toString();
     }
 
     public String getCarrierCode() {

@@ -44,7 +44,6 @@ public class AboutPageDocument extends View {
                 "<html lang=\"en\">\n";
         view += header.getHeader();
         view += "<body>\n\n";
-        view += navigation.getNavigation();
         view += about.getContent();
         view += footer.getFooter();
         view += "</body>\n" +

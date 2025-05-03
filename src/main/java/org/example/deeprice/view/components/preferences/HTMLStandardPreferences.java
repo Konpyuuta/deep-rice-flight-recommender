@@ -1,5 +1,7 @@
 package org.example.deeprice.view.components.preferences;
 
+import org.example.deeprice.ProjectConstants;
+
 /**
  *
  *
@@ -14,12 +16,20 @@ public class HTMLStandardPreferences extends HTMLPreferences {
 
     @Override
     public void initializeForm() {
-        form += "<h1 class=\"text-center\">Preferences</h1>\n" +
+        form += "<div class=\"container py-5\"><nav aria-label=\"breadcrumb\">\n" +
+                "  <ol class=\"breadcrumb\">\n" +
+                "    <li class=\"breadcrumb-item active\">" + ProjectConstants.ETERNAL_PREF_NAV + "</li>\n" +
+                "    <li class=\"breadcrumb-item aria-current=\"page\">Eternal Preferences</li>\n" +
+                "  </ol>\n" +
+                "</nav></div><h1 class=\"text-center\">Preferences</h1>\n" +
                 "<div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\">\n" +
                 "<form action=\"/flight-search\" method=\"post\"><label for=\"flight-time-range\" class=\"form-label\">How important is the flight time to me when booking a flight?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"flighttime\" id=\"flight-time-range\">\n" +
                 "    <br>\n" +
                 "    <br>\n" +
+                "    <label for=\"price\" class=\"form-label\">How important is a cheap price of a flight to me?</label>\n" +
+                "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"price\" id=\"price\">\n" +
+                "    <br><br>\n" +
                 "    <label for=\"customer-service\" class=\"form-label\">How important is the customer service in the aircraft to me?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"customerservice\" id=\"customer-service\">\n" +
                 "    <br><br>\n" +
