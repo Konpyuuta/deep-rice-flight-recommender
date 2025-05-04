@@ -402,7 +402,57 @@ Rules are defined by experts, e.g.,
 
 \subsection{Inference and Defuzzification}
 
+\section{Understanding the Flight Information Display}
 
+This section breaks down the visual elements and functionality presented in the flight information display for your Lufthansa journey from Zurich (ZRH) to Madrid (MAD) with a layover in Munich (MUC).
+
+\subsection{Flight Details Header: }
+\begin{itemize}
+    \item \textbf{Lufthansa Logo:} Located at the top left, this identifies the airline operating the flights.
+    \item \textbf{Flight Path:} \texttt{ZRH $\longrightarrow$ MUC $\longrightarrow$ MAD} clearly indicates your origin (Zürich), layover city (Munich), and final destination (Madrid). The arrows visually represent the progression of your journey.
+    \item \textbf{Flight Numbers:}
+    \begin{itemize}
+        \item \textbf{Flight 5763:} ZRH $\longrightarrow$ MUC
+        \item \textbf{Flight 1802:} MUC $\longrightarrow$ MAD
+    \end{itemize}
+    \item \textbf{Departure and Arrival Times:} \texttt{09:30 LUFTHANSA 10:30} shows the departure time from Zürich (09:30) and the arrival time in Munich (10:30). Similarly, \texttt{11:25 LUFTHANSA 14:20} indicates the departure time from Munich (11:25) and the arrival time in Madrid (14:20). The airline (Lufthansa) is also repeated here for clarity.
+    \item \textbf{Price:} \texttt{Price: 219.31,- CHF} displays the total cost of the flight in Swiss Francs (CHF).
+    \item \textbf{Price Indicator:} The happy emoji symbol and the text "Normal Price" suggests that the displayed price is the standard fare, and there might be other price options available (e.g., discounted or premium).
+\end{itemize}
+
+\subsection{Flight Segment Breakdown: }
+The display is divided into sections for each flight segment: Zürich to Munich and Munich to Madrid. Each segment provides similar information:
+
+\begin{itemize}
+    \item \textbf{Flight Information Line:} This repeats the flight number and the origin-destination airports for that specific leg (e.g., "Flight 5763: ZRH $\longrightarrow$ MUC").
+    \item \textbf{Customer Feedback Indicators:} Below each flight information line, you see a series of statements about Lufthansa's service, each accompanied by a colored bar and an icon:
+    \begin{itemize}
+        \item \textbf{Green Bar with a Green Plus Sign:} This indicates a positive aspects of Lufthansa's service, based on customer feedback.  In this case, "LUFTHANSA is well-known for it's good customer service."
+        \item \textbf{Red Bar with a Red Minus Sign :} This highlights areas where Lufthansa might not meet all customer expectations, according to feedback. The negative numerical value suggests a lower rating for these aspects. Examples include:
+        \begin{itemize}
+            \item "LUFTHANSA does maybe not meet your requirements, as the the food there is not highly viewed by customers."
+            \item "LUFTHANSA is not well-known for it's comfortable chairs."
+            \item "LUFTHANSA is not well-known for it's legroom."
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection{User Interface Element: }
+\begin{itemize}
+    \item \textbf{"Book Flight" Button:} Located at the bottom left, this blue button with white text is the primary call to action. Clicking this button would likely take you to the next stage of the booking process, where you can enter passenger details and finalize your reservation.
+\end{itemize}
+
+\subsection{How the UI Works: }
+The user interface is designed to provide you with essential flight details and a quick overview of customer sentiment regarding Lufthansa's services on these routes.
+
+\begin{enumerate}
+    \item \textbf{At a Glance Information:} The top header immediately presents the key information: your flight path, times, and the total price.
+    \item \textbf{Segmented Details:} By breaking down the journey into individual flight segments, you can see specific flight numbers and any relevant feedback for each leg.
+    \item \textbf{Visual Feedback Summary:} The colored bars and icons offer a quick visual assessment of Lufthansa's strengths (green) and weaknesses (red) based on customer experiences. The numerical values provide a relative measure of this feedback.
+    \item \textbf{Actionable Button:} The prominent "Book Flight" button allows you to proceed with your booking if the provided information meets your needs.
+\end{enumerate}
+
+In essence, this UI aims to be informative and help you make a quick decision by presenting the necessary flight details alongside customer feedback in an easily digestible format.
 
 % It is all standard \LaTeX, as you can see.
 
