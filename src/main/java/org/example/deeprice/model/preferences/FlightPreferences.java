@@ -19,7 +19,7 @@ public class FlightPreferences {
 
     private Boolean isDirectFlight = Boolean.FALSE;
 
-    private FlightClass flightClass;
+    private String flightClass;
 
     private static FlightPreferences instance;
 
@@ -35,21 +35,21 @@ public class FlightPreferences {
         return instance;
     }
 
-    public FlightClass getFlightClass() {
+    public String getFlightClass() {
         return flightClass;
     }
 
     public void setFlightClass(String flightClass) {
-        FlightClass f;
+        String f;
         switch (flightClass) {
             case "Economy":
-                f = FlightClass.ECONOMY;
+                f = "ECONOMY";
                 break;
             case "Business":
-                f = FlightClass.BUSINESS;
+                f = "BUSINESS";
                 break;
             default:
-                f = FlightClass.FIRST;
+                f = "FIRST";
         }
         this.flightClass = f;
     }

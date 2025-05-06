@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class ParseAPIResponseCommand implements Command {
                 JSONObject itinerary = itineraries.getJSONObject(j);
                 JSONArray segments = itinerary.getJSONArray("segments");
                 FlightItinerary flightItinerary = new FlightItinerary();
+                LocalDateTime tmpDuration = null;
                 for(int k = 0; k < segments.length(); k++) {
                     JSONObject segment = segments.getJSONObject(k);
                     Flight flightSegment = new Flight();
@@ -67,15 +69,25 @@ public class ParseAPIResponseCommand implements Command {
                     flightSegment.setArrivalTime(segment.getJSONObject("arrival").getString("at"));
                     LocalDateTime arrTime = LocalDateTime.parse(segment.getJSONObject("arrival").getString("at"), formatter);
                     LocalDateTime depTime = LocalDateTime.parse(segment.getJSONObject("departure").getString("at"), formatter);
-                    Duration segmentDuration = Duration.between(arrTime, depTime);
-                    totalDuration.plus(segmentDuration);
+                    Duration segmentDuration = Duration.between(depTime, arrTime);
+                    System.out.println("fligttime: " + segmentDuration.toMinutes() + " minutes");
+                    if(tmpDuration != null) {
+                        System.out.println("layover time: " + Duration.between(tmpDuration, depTime).toMinutes() + " minutes");
+                        Duration layoverTime = segmentDuration.plus(Duration.between(tmpDuration, depTime));
+                        totalDuration = totalDuration.plus(layoverTime);
+                    } else {
+                        totalDuration = totalDuration.plus(segmentDuration);
+                    }
+                    System.out.println("SEGMENT DURATION: " + totalDuration.toMinutes() + " MINUTES");
                     flightSegment.setCarrierCode(segment.getString("carrierCode"));
                     flightSegment.setFlightId(segment.getString("number"));
                     flightItinerary.addFlight(flightSegment);
+                    tmpDuration = arrTime;
                 }
                 flightItinerary.setHasLayover(flightItinerary.getFlights().size() > 1);
                 journey.addFlightItinerary(flightItinerary);
-                journey.setTotalJourneyTime((double)totalDuration.toHours());
+                System.out.println("TOTAL FLIGHT TIME: " + totalDuration.toMinutes() / 60);
+                journey.setTotalJourneyTime(totalDuration.toMinutes() / 60.0);
 
             }
             JSONArray travelerPricings = flight.getJSONArray("travelerPricings");

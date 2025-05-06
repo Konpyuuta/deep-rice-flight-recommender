@@ -57,7 +57,7 @@ public class GoogleFlightsApiRequest implements Command {
             connection = (HttpURLConnection) urlRequest.openConnection();
             connection.setRequestMethod(REQUEST_METHOD);
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
+
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

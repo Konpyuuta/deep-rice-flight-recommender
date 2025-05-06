@@ -2,11 +2,10 @@ package org.example.deeprice.commands;
 
 import org.example.deeprice.model.Flight;
 import org.example.deeprice.model.preferences.EternalPreferences;
-import org.example.deeprice.model.preferences.RatingDeclaration;
-import org.example.deeprice.model.rating.FuzzyHeight;
 import org.example.deeprice.model.rating.map.FunctionalMapper;
 import org.example.deeprice.model.rating.map.RatingKey;
-import org.example.deeprice.model.rating.map.SDFunctionalMapper;
+import org.example.deeprice.model.rating.map.SDFunctionalPriceMapper;
+import org.example.deeprice.model.rating.map.SDFunctionalTimeMapper;
 import org.example.deeprice.model.user.User;
 
 import java.util.*;
@@ -65,8 +64,8 @@ public class CalculateSimilarityCommand implements Command {
 
     public static Double[] calculateGlobalsMatch(Double timeValue, Double priceValue) {
         Double[] globalsMatch = new Double[2];
-        globalsMatch[0] = calculateSDMatch(EternalPreferences.getInstance().getFlightTimePreference(), timeValue.doubleValue());
-        globalsMatch[1] = calculateSDMatch(EternalPreferences.getInstance().getPricePreference(), priceValue.doubleValue());
+        globalsMatch[0] = calculateSDMatch(EternalPreferences.getInstance().getFlightTimePreference(), timeValue.doubleValue(), SDFunctionalTimeMapper.getRatingFunctionMap());
+        globalsMatch[1] = calculateSDMatch(EternalPreferences.getInstance().getPricePreference(), priceValue.doubleValue(), SDFunctionalPriceMapper.getRatingFunctionMap());
         return globalsMatch;
     }
 
@@ -75,7 +74,7 @@ public class CalculateSimilarityCommand implements Command {
         userPrefs[0] = prefs.getFoodPreference().floatValue();
         userPrefs[1] = prefs.getCustomerServicePreference().floatValue();
         userPrefs[2] = prefs.getSeatComfortabilityPreference().floatValue();
-        userPrefs[3] = calculateFuzzyHeight().floatValue();
+        userPrefs[3] = (float)Math.round(calculateFuzzyHeight());
 
     }
 
@@ -91,8 +90,7 @@ public class CalculateSimilarityCommand implements Command {
         return ratingMap.get(new RatingKey(userPref, airlineRating));
     }
 
-    private static Double calculateSDMatch(Double userPref, Double sd) {
-        Map<RatingKey, Double> ratingMap = SDFunctionalMapper.getRatingFunctionMap();
+    private static Double calculateSDMatch(Double userPref, Double sd, Map<RatingKey, Double> ratingMap) {
         Set<RatingKey> keys = ratingMap.keySet();
         RatingKey rightKey = new RatingKey(userPref, sd);
         for (RatingKey key : keys) {
@@ -110,11 +108,11 @@ public class CalculateSimilarityCommand implements Command {
         if(height < 160) {
             return 1.0;
         } else if (height >= 160 && height < 170) {
-            return 2.0;
+            return (2.0 + (((height + 1) - 160)/10));
         } else if(height >= 170 && height < 180) {
-            return 3.0;
+            return (3.0 + (((height + 1) - 170)/10));
         } else if(height >= 180 && height < 190) {
-            return 4.0;
+            return (4.0 + (((height + 1) - 180)/10));
         } else {
             return 5.0;
         }

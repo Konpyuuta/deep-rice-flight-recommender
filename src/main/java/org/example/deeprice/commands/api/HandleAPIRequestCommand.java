@@ -22,6 +22,7 @@ public class HandleAPIRequestCommand implements Command {
     private String destinationLocationCode;
     private String departureDate;
     private String adults;
+    private String flightClass;
     private final Integer maxResults = 10;
 
     public HandleAPIRequestCommand() {
@@ -30,6 +31,7 @@ public class HandleAPIRequestCommand implements Command {
         this.destinationLocationCode = flightPreferences.getInstance().getDestinationAirport().getAirportID();
         this.departureDate = flightPreferences.getDepartureDateTime();
         this.adults = String.valueOf(flightPreferences.getAdults());
+        this.flightClass = flightPreferences.getFlightClass();
 
     }
 
@@ -41,6 +43,7 @@ public class HandleAPIRequestCommand implements Command {
         apiCommand.initializeParameter("destinationLocationCode", flightPreferences.getDestinationAirport().getAirportID());
         apiCommand.initializeParameter("departureDate", flightPreferences.getDepartureDateTime());
         apiCommand.initializeParameter("adults", String.valueOf(flightPreferences.getAdults()));
+        apiCommand.initializeParameter("travelClass", flightPreferences.getFlightClass());
         apiCommand.execute();
         parseResponse(apiCommand.getResponse());
         //originLocationCode=ZRH&destinationLocationCode=BKK&departureDate=2025-05-02&adults=1&nonStop=false&max=250

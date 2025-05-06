@@ -94,7 +94,8 @@ public class CreateRankingCommand implements Command {
                  negSum += resultVector[i];
             }
         }
-        flightJourney.setTimeSD(timeSD);
+        double val1 = (flightJourney.getTotalJourneyTime() - timeMean) / timeSD;
+        flightJourney.setTimeSD(val1);
         double val = (flightJourney.getPrice() - priceMean)/priceSD;
         flightJourney.setPriceSD(val);
         journeyToResultMap.put(flightJourney, (negSum / resultVectorList.size()));
