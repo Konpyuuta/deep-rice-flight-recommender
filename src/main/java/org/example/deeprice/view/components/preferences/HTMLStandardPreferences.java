@@ -24,20 +24,29 @@ public class HTMLStandardPreferences extends HTMLPreferences {
                 "</nav></div><h1 class=\"text-center\">Preferences</h1>\n" +
                 "<div class=\"container py-5 bg-light\" style=\"border-radius: 15px;\">\n" +
                 "<form action=\"/flight-search\" method=\"post\"><label for=\"flight-time-range\" class=\"form-label\">How important is the flight time to me when booking a flight?</label>\n" +
-                "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"flighttime\" id=\"flight-time-range\">\n" +
+                "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"flighttime\" id=\"flight-time-range\">" +
+                "    <small id=\"emailHelp\" class=\"form-text text-muted\">Left side: I don't care about it at all. Middle: Neutral, care about it but it's not that important. Right side: Strongly care about it</small>\n" +
                 "    <br>\n" +
                 "    <br>\n" +
                 "    <label for=\"price\" class=\"form-label\">How important is a cheap price of a flight to me?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"price\" id=\"price\">\n" +
+                "    <small id=\"emailHelp\" class=\"form-text text-muted\">Left side: I don't care about it at all. Middle: Neutral, care about it but it's not that important. Right side: Strongly care about it</small>\n" +
+
                 "    <br><br>\n" +
                 "    <label for=\"customer-service\" class=\"form-label\">How important is the customer service in the aircraft to me?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"customerservice\" id=\"customer-service\">\n" +
+                "    <small id=\"emailHelp\" class=\"form-text text-muted\">Left side: I don't care about it at all. Middle: Neutral, care about it but it's not that important. Right side: Strongly care about it</small>\n" +
+
                 "    <br><br>\n" +
                 "    <label for=\"seat\" class=\"form-label\">How important is the seat comfortability to me?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"seat\" id=\"seat\">\n" +
+                "    <small id=\"emailHelp\" class=\"form-text text-muted\">Left side: I don't care about it at all. Middle: Neutral, care about it but it's not that important. Right side: Strongly care about it</small>\n" +
+
                 "    <br><br>\n" +
                 "    <label for=\"food-service\" class=\"form-label\">How important is the Quality of the food served in the aircraft to me?</label>\n" +
                 "    <input type=\"range\" class=\"form-range\" min=\"1\" max=\"5\" name=\"foodservice\" id=\"food-service\">\n" +
+                "    <small id=\"emailHelp\" class=\"form-text text-muted\">Left side: I don't care about it at all. Middle: Neutral, care about it but it's not that important. Right side: Strongly care about it</small>\n" +
+
                 "    <br>\n" +
                 "    <br>\n" +
                 "    <label for=\"height\" class=\"form-label\">How tall are you?</label>\n" +

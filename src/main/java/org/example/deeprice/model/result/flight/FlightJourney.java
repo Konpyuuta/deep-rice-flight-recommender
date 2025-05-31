@@ -115,32 +115,32 @@ public class FlightJourney {
                         "               <h5 class=\"card-title\">Flight " + flight.getFlightId() + ": " + flight.getDepartureAirport().getAirportID() + " ---> <i class=\"fas fa-plane\"></i> ---> " + flight.getArrivalAirport().getAirportID() + " &nbsp;</h5>\n" +
                         "               <div style=\"background-color: #d4edda; border: 1px solid green; text-align: center;\"><i class=\"fa-solid fa-circle-plus\" style=\"color: green;\"></i></div>");
                 for (int i = 0; i < flight.getRatings().length; i++) {
-                    if (i == 0 && flight.getRatings()[i] > 0) {
-                        sb.append("<div id=\"food-req\"><i class=\"fas fa-utensils\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is known for it's delicious meals.</div>");
+                    if (i == 0 && flight.getRatings()[i] >= 0.2) {
+                        sb.append(" <div id=\"food-req\"><i class=\"fas fa-utensils\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is known for it's delicious meals.</div>");
                     }
-                    if (i == 1 && flight.getRatings()[i] > 0) {
+                    if (i == 1 && flight.getRatings()[i] >= 0.2) {
                         sb.append("<div id=\"customer-service-req\"><i class=\"fas fa-headset\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is well-known for it's good customer service.</div>");
                     }
-                    if (i == 2 && flight.getRatings()[i] > 0) {
+                    if (i == 2 && flight.getRatings()[i] >= 0.2) {
                         sb.append("<div id=\"seat-req\"><i class=\"fas fa-chair\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is well-known for it's comfortable chairs.</div>");
                     }
-                    if (i == 3 && flight.getRatings()[i] > 0) {
+                    if (i == 3 && flight.getRatings()[i] >= 0.2) {
                         sb.append("<div id=\"legroom-req\"><i class=\"fas fa-shoe-prints\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is well-known for it's generous legroom.</div>");
                     }
                 }
                 sb.append("<div style=\"background-color: #f28b82; border: 1px solid darkred; text-align: center; margin-top: 5%;\"><i class=\"fa-solid fa-circle-minus\" style=\"color: darkred;\"></i></div>");
 
                 for (int i = 0; i < flight.getRatings().length; i++) {
-                    if (i == 0 && flight.getRatings()[i] < 0) {
+                    if (i == 0 && flight.getRatings()[i] <= -0.2) {
                         sb.append("<div id=\"food-req\"><i class=\"fas fa-utensils\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " does maybe not meet your requirements, as the the food there is not highly viewed by customers.</div>");
                     }
-                    if (i == 1 && flight.getRatings()[i] < 0) {
+                    if (i == 1 && flight.getRatings()[i] <= -0.2) {
                         sb.append("<div id=\"customer-service-req\"><i class=\"fas fa-headset\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is <span style=\"font-weight: bold;\">not</span> well-known for it's good customer service.</div>");
                     }
-                    if (i == 2 && flight.getRatings()[i] < 0) {
+                    if (i == 2 && flight.getRatings()[i] <= -0.2) {
                         sb.append("<div id=\"seat-req\"><i class=\"fas fa-chair\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is <span style=\"font-weight: bold;\">not</span> well-known for it's comfortable chairs.</div>");
                     }
-                    if (i == 3 && flight.getRatings()[i] < 0) {
+                    if (i == 3 && flight.getRatings()[i] <= -0.2) {
                         sb.append("<div id=\"legroom-req\"><i class=\"fas fa-shoe-prints\"></i> " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " is <span style=\"font-weight: bold;\">not</span> well-known for it's legroom.</div>");
                     }
                 }

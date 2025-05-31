@@ -21,9 +21,9 @@ import java.util.Map;
  */
 public class AmadeusFlightsAPICommand implements Command {
 
-    private final String API_KEY = "";
+    private final String API_KEY = "zQXct7a3rkmZAQPmtvOOkwEA6TEyaJKA";
 
-    private final String API_SECRET = "";
+    private final String API_SECRET = "nnuYhl0VtBZatK1S";
 
     private String URI = "https://test.api.amadeus.com/v2/shopping/flight-offers?";
 
@@ -97,7 +97,6 @@ public class AmadeusFlightsAPICommand implements Command {
             connection.setRequestProperty("Accept", "application/json");
 
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
@@ -109,7 +108,6 @@ public class AmadeusFlightsAPICommand implements Command {
 
             in.close();
             connection.disconnect();
-            System.out.println("Flight Offers Response:\n" + content.toString());
             response = content.toString();
 
         } catch (IOException e) {
