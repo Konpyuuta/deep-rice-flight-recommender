@@ -17,23 +17,6 @@ public class DeepRiceApplication {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(DeepRiceApplication.class, args);
-
-		/*HandleAPIRequestCommand handleAPIRequestCommand = new HandleAPIRequestCommand();
-		handleAPIRequestCommand.execute();
-		ArrayList<Record> records = GraphDBConnector.getInstance().executeQuery("MATCH (n) WHERE n.iata = 'EK' RETURN n");
-		for(Record record : records) {
-			Node n = record.get("n").asNode();
-			Map<String, Object> propMap = n.asMap();
-			for(Map.Entry entry : propMap.entrySet()) {
-				System.out.println(entry.getKey() + ": " + entry.getValue());
-			}
-		}*/
-		//GoogleFlightsApiRequest request = new GoogleFlightsApiRequest();
-		//AmadeusFlightsAPICommand request = new AmadeusFlightsAPICommand();
-		//request.execute();
-		//request.searchFlights("ZRH", "DBX", "2025-06-01");
-		//HandleAPIRequestCommand c = new HandleAPIRequestCommand("ZRH", "BKK", "2025-07-07", "1", 0.0, 0.0, 0.0, null);
-		//c.execute();
 	}
 
 }
