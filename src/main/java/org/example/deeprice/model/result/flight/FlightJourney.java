@@ -102,8 +102,10 @@ public class FlightJourney {
                 sb.append(flight.getDepartureTime() + " " + AirlinesMap.IATA_AIRLINES_MAP.get(flight.getCarrierCode()) + " " + flight.getArrivalTime() + "&nbsp;&nbsp;&nbsp;");
             }
             sb.append("</div></div></div></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div align=\"right\" style=\"font-weight: bold;\">");
+            // Keep in mind that the values we calculated the preference scores with were rounded, so when its >= 0.5, it is also >= 1.0
             if(priceSD >= 0.5) {
                 sb.append("Price: " + price + ".- CHF<div><i class=\"fas fa-triangle-exclamation\" style=\"color: red;\"></i> - Expensive!</div>");
+                // Same principle as above.
             } else if(priceSD <= -0.5) {
                 sb.append("Price: " + price + ".- CHF<div><i class=\"fas fa-face-smile\"></i> - Low Price!</div>");
             } else {
